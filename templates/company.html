@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<title>Job Portal - Companies</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+    }
+
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        padding: 20px;
+    }
+
+    .company-card {
+        width: 300px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        margin: 20px;
+        overflow: hidden;
+        position: relative;
+        transition: transform 0.5s;
+    }
+
+    .company-card:hover {
+        transform: translateY(-10px);
+    }
+
+    .company-card::before {
+        content: '';
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+        border: 2px solid transparent;
+        border-radius: 10px;
+        transition: border-color 0.3s;
+    }
+
+    .company-card:hover::before {
+        border-color: #dc3545;
+    }
+
+    .company-logo {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 10px 10px 0 0;
+    }
+
+    .company-info {
+        padding: 20px;
+        text-align: center;
+        display: none;
+    }
+
+    .company-name {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .company-description {
+        color: #666;
+        line-height: 1.5;
+    }
+
+    .company-details {
+        margin-top: 20px;
+    }
+
+    .company-details p {
+        margin: 5px 0;
+        color: #888;
+    }
+
+    .card-link {
+        color: #dc3545; /* Set the link color */
+        text-decoration: none; /* Remove underline */
+        transition: color 0.3s; /* Add transition effect */
+    }
+
+    .card-link:hover {
+        color: #c82333; /* Darken the link color on hover */
+    }
+
+    /* Navbar styles */
+    .navbar {
+        background-color: white; /* White color for navbar */
+        padding: 15px 10px;
+        display: flex;
+        justify-content: space-between;
+        position: fixed;
+        align-items: center;
+        color: #fff; /* White text color */
+        width: 100%; /* Full width */
+        z-index: 1; /* Ensure navbar is above the content */
+        transition: background-color 0.5s; /* Add transition effect */
+    }
+
+    .navbar.scrolled {
+        background-color: #ffffff; /* Change background color on scroll */
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow on scroll */
+    }
+
+    .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #000; /* Black color for OJP logo */
+    }
+
+    .nav-links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+    }
+
+    .nav-links li {
+        margin-right: 20px;
+    }
+
+    .nav-links li a {
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 15px; /* Add padding to make it look like a button */
+        border-radius: 5px; /* Add border-radius for rounded corners */
+        background-color: #dc3545; /* Set background color for button */
+        transition: background-color 0.3s; /* Add transition effect */
+        display: inline-block; /* Make the link a block-level element */
+    }
+
+    .nav-links li a:hover {
+        background-color: #c82333; /* Darken the background color on hover */
+    }
+
+    .footer-basic {
+        padding: 40px 0;
+        background-color: #ffffff;
+        color: #4b4c4d;
+        text-align: center;
+        width: 100%;
+    }
+
+    .footer-basic ul {
+        padding: 0;
+        list-style: none;
+        text-align: center;
+        font-size: 18px;
+        line-height: 1.6;
+        margin-bottom: 0;
+        display: flex;
+        justify-content: center;
+    }
+
+    .footer-basic li {
+        padding: 0 10px;
+    }
+
+    .footer-basic ul a {
+        color: inherit;
+        text-decoration: none;
+        opacity: 0.8;
+    }
+
+    .footer-basic ul a:hover {
+        opacity: 1;
+    }
+
+    .footer-basic .social {
+        text-align: center;
+        padding-bottom: 25px;
+    }
+
+    .footer-basic .social>a {
+        font-size: 24px;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        display: inline-block;
+        text-align: center;
+        border-radius: 50%;
+        border: 1px solid #ccc;
+        margin: 0 8px;
+        color: inherit;
+        opacity: 0.75;
+    }
+
+    .footer-basic .social>a:hover {
+        opacity: 0.9;
+    }
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar" id="navbar">
+    <div class="logo">OJP</div>
+    <ul class="nav-links">
+        <li><a href="{% url 'jobseekerhomepage' %}">Home</a></li>
+    </ul>
+</nav>
+<br><br><br><br><br>
+<!-- Company Cards Container -->
+<div class="container">
+    <a href="https://www.amazon.jobs/en/" class="company-card" target="_blank">
+        <img class="company-logo" src="https://flatironschool.com/wp-content/uploads/2022/11/Resized-blog-thumbnail-17.png" alt="Company 1 Logo">
+        <div class="company-info">
+            <h2 class="company-name">TimesJobs</h2>
+            <p class="company-description">Indian employment website operating in India and Middle East</p>
+            <div class="company-details">
+                <p><strong>Location:</strong> DELHI, INDIA</p>
+                <p><strong>CEO:</strong>Samir Jain </p>
+                <p><strong>Website:</strong> <span class="card-link">www.timesjobs.com</span></p>
+            </div>
+        </div>
+    </a>
+
+    <!-- Add more company cards here -->
+    <!-- Sample Company Card -->
+    <a href="https://jobs.netflix.com/" class="company-card" target="_blank">
+        <img class="company-logo" src="https://jobs.netflix.com/static/images/Netflix-Social-Rectangle.png" alt="Company 2 Logo">
+        <div class="company-info">
+            <h2 class="company-name"> Indeed</h2>
+            <p class="company-description"> Indeed is an American job search website that launched in 2004. It is a subsidiary of Japan's Recruit Holdings and has offices around the world.</p>
+            <div class="company-details">
+                <p><strong>Location:</strong> Austin, Texas</p>
+                <p><strong>CEO:</strong> Paul Forster</p>
+                <p><strong>Website:</strong> <span class="card-link">www.in.indeed.com</span></p>
+            </div>
+        </div>
+    </a>
+    <a href="https://www.infosys.com/" class="company-card" target="_blank">
+        <img class="company-logo" src="https://cdn-ukwest.onetrust.com/logos/8d84415b-1b52-4bc4-8d5f-ca9a8eccaf8a/f7db8968-fc22-4620-92ac-dc05c5d2aa15/02460a41-565e-4cac-80a7-449bc8f77a72/logo-infosys.png" alt="Company 2 Logo">
+        <div class="company-info">
+            <h2 class="company-name">Naukri</h2>
+            <p class="company-description">Naukri.com is an Indian employment website operating in India and Middle East.</p>
+            <div class="company-details">
+                <p><strong>Location:</strong> MIDDILE EAST, INDIA</p>
+                <p><strong>CEO:</strong> Sanjeev Bikhchandani </p>
+                <p><strong>Website:</strong> <span class="card-link">www.naukri.com</span></p>
+            </div>
+        </div>
+    </a>
+    <a href="https://www.apple.com/careers/in/" class="company-card" target="_blank">
+        <img class="company-logo" src="https://1000logos.net/wp-content/uploads/2017/02/Apple-Logosu.png" alt="">
+        <div class="company-info">
+            <h2 class="company-name"> LinkedIn</h2>
+            <p class="company-description">LinkedIn is a social network for professionals</p>
+            <div class="company-details">
+                <p><strong>Location:</strong>  Mountain View, California,</p>
+                <p><strong>CEO:</strong> Ryan Roslansky. Jeff Weiner </p>
+                <p><strong>Website:</strong> <span class="card-link">www.linkedin.com</span></p>
+            </div>
+        </div>
+    </a>
+    <a href="https://www.microsoft.com/en-in" class="company-card" target="_blank">
+        <img class="company-logo" src="https://cionews.co.in/wp-content/uploads/2022/05/Microsoft-Logo.png" alt="Company 2 Logo">
+        <div class="company-info">
+            <h2 class="company-name">Foundit</h2>
+            <p class="company-description">foundit, formerly Monster, has evolved from being a 'job board' to a global provider of everything you need for a successful career. We've been in the pursuit of connecting people with the right job opportunities for over two decades now.</p>
+            <div class="company-details">
+                <p><strong>Location:</strong> Southeast Asia</p>
+                <p><strong>CEO:</strong> Warren Cowan</p>
+                <p><strong>Website:</strong> <span class="card-link">www.foundit.in</span></p>
+            </div>
+        </div>
+    </a>
+        <a href="https://www.coca-colacompany.com/" class="company-card" target="_blank">
+        <img class="company-logo" src="https://www.allrecipes.com/thmb/POvyAyvrtIb18HQI3XvWbwm6MNQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/AR-coca-cola-logo-2x1-c52ae4acdb1e443993adb36fee566700.jpg" alt="Company 2 Logo">
+        <div class="company-info">
+            <h2 class="company-name">Foundit</h2>
+            <p class="company-description">foundit, formerly Monster, has evolved from being a 'job board' to a global provider of everything you need for a successful career. We've been in the pursuit of connecting people with the right job opportunities for over two decades now.</p>
+            <div class="company-details">
+                <p><strong>Location:</strong> Southeast Asia</p>
+                <p><strong>CEO:</strong> Warren Cowan</p>
+                <p><strong>Website:</strong> <span class="card-link">www.foundit.in</span></p>
+            </div>
+        </div>
+    </a>
+        <a href="https://www.ibm.com/in-en/careers" class="company-card" target="_blank">
+        <img class="company-logo" src="https://www.cheggindia.com/wp-content/uploads/2023/09/ibm-full-form.png" alt="Company 2 Logo">
+        <div class="company-info">
+            <h2 class="company-name">Foundit</h2>
+            <p class="company-description">foundit, formerly Monster, has evolved from being a 'job board' to a global provider of everything you need for a successful career. We've been in the pursuit of connecting people with the right job opportunities for over two decades now.</p>
+            <div class="company-details">
+                <p><strong>Location:</strong> Southeast Asia</p>
+                <p><strong>CEO:</strong> Warren Cowan</p>
+                <p><strong>Website:</strong> <span class="card-link">www.foundit.in</span></p>
+            </div>
+        </div>
+    </a>
+        <a href="https://www.samsung.com/in/about-us/careers/" class="company-card" target="_blank">
+        <img class="company-logo" src="https://bsmedia.business-standard.com/_media/bs/img/about-page/1562575696.png?im=FeatureCrop,size=(826,465)" alt="Company 2 Logo">
+        <div class="company-info">
+            <h2 class="company-name">Foundit</h2>
+            <p class="company-description">foundit, formerly Monster, has evolved from being a 'job board' to a global provider of everything you need for a successful career. We've been in the pursuit of connecting people with the right job opportunities for over two decades now.</p>
+            <div class="company-details">
+                <p><strong>Location:</strong> Southeast Asia</p>
+                <p><strong>CEO:</strong> Warren Cowan</p>
+                <p><strong>Website:</strong> <span class="card-link">www.foundit.in</span></p>
+            </div>
+        </div>
+    </a>
+
+</div>
+<br><br><br><br><br><br>
+<!-- Footer -->
+<div class="footer-basic">
+    <footer>
+        <div class="social">
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-google"></i></a>
+            <a href="#"><i class="fa fa-linkedin"></i></a>
+            <a href="#"><i class="fa fa-instagram"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+        </div>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="{% url 'homepage' %}">Home</a></li>
+            <li class="list-inline-item"><a href="#">Services</a></li>
+            <li class="list-inline-item"><a href="{% url 'about' %}">About</a></li>
+            <li class="list-inline-item"><a href="#">Terms</a></li>
+            <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+        </ul>
+        <br><br><br>
+        <center>
+            <p>&copy; 2024 Job Portal. All rights reserved.</p>
+        </center>
+    </footer>
+</div>
+
+<script>
+    // Function to toggle visibility of company details
+    document.querySelectorAll('.company-card').forEach(card => {
+        card.addEventListener('click', () => {
+            card.querySelector('.company-info').classList.toggle('visible');
+        });
+    });
+
+    // Add class to navbar on scroll
+    window.onscroll = function() {scrollFunction()};
+    function scrollFunction() {
+        if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+            document.getElementById("navbar").classList.add("scrolled");
+        } else {
+            document.getElementById("navbar").classList.remove("scrolled");
+        }
+    }
+</script>
+
+</body>
+</html>
