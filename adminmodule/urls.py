@@ -19,8 +19,20 @@ urlpatterns = [
     path('logout', views.logout, name='logout'),
     path('company', views.company, name='company'),
     path('read', views.read, name='read'),
-
+    path('admin_login/', views.admin_login, name='admin_login'),
+    path('admin_logout/', views.admin_logout, name='admin_logout'),
+    path('admin_homepage/', views.admin_homepage, name='admin_homepage'),
+    path('admin_dashboard/', views.admin_dashboard, name='admin_dashboard'),
+    path('delete_user/<int:user_id>/', views.delete_user, name='delete_user'),
     path('account_details', views.account_details, name='account_details'),
+    path('user_application_dashboard/', views.user_application_dashboard, name='user_application_dashboard'),
+    path('delete/<int:application_id>/', views.delete_job_application, name='delete_application'),
+    path('confirm_delete/<int:application_id>/', views.confirm_delete_application, name='confirm_delete_application'),
+    path('application/<int:application_id>/accept/', views.accept_job_application, name='accept_job_application'),
+    path('application/<int:application_id>/confirm_accept/', views.confirm_accept_application,
+         name='confirm_accept_application'),
+    # other URL patterns
+
     path('user_profile', views.user_profile, name='user_profile'),
 
     path('password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),

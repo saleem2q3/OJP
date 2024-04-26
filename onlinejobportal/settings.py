@@ -129,16 +129,13 @@ STATICFILES_DIRS = [
 LOGIN_URL = "login"
 LOGIN_REDIRECT_URL = "homepage"
 LOGOUT_REDIRECT_URL = "login"
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-
-# Email Host Email Address
 EMAIL_HOST_USER = 'ssaleem2409@gmail.com'
 EMAIL_HOST_PASSWORD = 'fnfu bliv hlik endt'
 EMAIL_USE_TLS = True
-
-
+DEFAULT_FROM_EMAIL = 'ssaleem2409@example.com'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 

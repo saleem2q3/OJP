@@ -1,5 +1,4 @@
 from employermodule.models import JobDetails
-from django.shortcuts import render
 
 
 def viewjobs(request):
@@ -12,9 +11,7 @@ def job_details_list(request):
 
 
 def job_application_list(request):
-    jobs = Job.objects.all()  # Assuming you're fetching a list of jobs
-    context = {'jobs': jobs}
-    return render(request, 'jobseekermodule/job_application_list.html', context)
+    return render(request, 'jobseekermodule/job_application_list.html')
 
 
 def job_applications(request):
@@ -22,16 +19,17 @@ def job_applications(request):
     return render(request, 'job_applications.html', {'job_applications': job_applications})
 
 
-def submit_application(request, job_id):
-    job = JobDetails.objects.get(pk=job_id)
+from django.shortcuts import render, redirect
+from .models import JobApplication
+from .forms import JobApplicationForm
 
+
+def submit_application(request):
     if request.method == 'POST':
         form = JobApplicationForm(request.POST, request.FILES)
         if form.is_valid():
-            # Save the job application to the database
             form.save()
             return redirect('jobseekerhomepage')
     else:
-        form = JobApplicationForm(initial={'job_details': job.work_title})
-
+        form = JobApplicationForm()
     return render(request, 'submit_application.html', {'form': form})

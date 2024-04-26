@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9; /* Changed to light white */
+        }
+        .navbar {
+            background-color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+        }
+        .footer-basic {
+            padding: 40px 0;
+            background-color: #ffffff;
+            color: #4b4c4d;
+        }
+        .footer-basic ul {
+            padding: 0;
+            list-style: none;
+            text-align: center;
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+        .footer-basic li {
+            padding: 0 10px;
+        }
+        .footer-basic ul a {
+            color: inherit;
+            text-decoration: none;
+            opacity: 0.8;
+        }
+        .footer-basic ul a:hover {
+            opacity: 1;
+        }
+        .footer-basic .social {
+            text-align: center;
+            padding-bottom: 25px;
+        }
+        .footer-basic .social>a {
+            font-size: 24px;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            display: inline-block;
+            text-align: center;
+            border-radius: 50%;
+            border: 1px solid #ccc;
+            margin: 0 8px;
+            color: inherit;
+            opacity: 0.75;
+        }
+        .footer-basic .social>a:hover {
+            opacity: 0.9;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #28a745;
+            color: white;
+        }
+        tr:hover {
+            background-color: #e9e9e9;
+        }
+        button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #c82333;
+        }
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        tbody tr {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .nav-links {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+        }
+        .nav-links li {
+            margin-right: 20px;
+        }
+        .nav-links li a {
+            text-decoration: none;
+            color: black; /* Changed to white */
+            background-color: #; /* Added red background */
+            padding: 10px 20px; /* Added padding for better appearance */
+            border-radius: 5px; /* Added border radius for rounded corners */
+        }
+        .nav-links li a:hover {
+            background-color: #; /* Darker red on hover */
+        }
+    </style>
+    <title>Admin Dashboard</title>
+</head>
+<body>
+    <div class="navbar">
+        <h2>OJP</h2>
+        <ul class="nav-links">
+            <li><a href="{% url 'admin_homepage' %}">Home</a></li>
+            <li><a href="{% url 'user_application_dashboard' %}">User dashboard</a></li>
+        </ul>
+    </div>
+    <br><br><br><br><br>
+    <center>
+    <h2>Employers</h2>
+    </center>
+    <table>
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in employers %}
+            <tr>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.first_name }}</td>
+                <td>{{ user.last_name }}</td>
+                <td>
+                    <form action="{% url 'delete_user' user.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+<center>
+    <h2>Job Seekers</h2>
+    </center>
+    <table>
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in jobseekers %}
+            <tr>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.first_name }}</td>
+                <td>{{ user.last_name }}</td>
+                <td>
+                    <form action="{% url 'delete_user' user.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br><br><br><br><br><br><br><br>
+ <div class="footer-basic">
+        <footer>
+            <div class="social"><a href="#"><i class="fa fa-facebook"></i></a><a href="https://www.google.co.in/"><i class="fa fa-google"></i></a><a href="https://www.linkedin.com/in/vamsi-krishna-gondu-0bba5124b/?originalSubdomain=in"><i class="fa fa-linkedin"></i></a><a href="https://www.instagram.com/"><i class="fa fa-instagram"></i></a><a href="#"><i class="fa fa-twitter"></i></a></div>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="#">Home</a></li>
+                <li class="list-inline-item"><a href="">Services</a></li>
+                <li class="list-inline-item"><a href="#">About</a></li>
+                <li class="list-inline-item"><a href="#">Terms</a></li>
+                <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+            </ul>
+            <br><br><br>
+            <center>
+                <p class="copyright">&copy; 2024 Job Portal. All rights reserved by DUDEKULA SALEEM.</p>
+            </center>
+        </footer>
+ </div>
+</body>
+</html>

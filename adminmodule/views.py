@@ -1,11 +1,12 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
-
-from django.core.mail import EmailMessage
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth import authenticate, login, logout
+from django.core.mail import EmailMessage, send_mail
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib import auth
+from jobseekermodule.models import JobApplication
 
 
 # Create your views here.
@@ -193,3 +194,116 @@ def user_profile(request):
         form = UserProfileForm()
 
     return render(request, 'user_profile.html', {'form': form})
+
+
+def admin_login(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None and user.is_superuser:
+            login(request, user)
+            return redirect('admin_homepage')  # Redirect to admin homepage
+        else:
+            messages.error(request, 'Invalid username or password')
+            return render(request, 'admin_login.html')  # Render admin login page with error message
+
+    return render(request, 'admin_login.html')  # Render admin login page
+
+
+# Redirect to admin login page after logout
+
+
+def admin_homepage(request):
+    return render(request, 'admin_homepage.html')
+
+
+def admin_logout(request):
+    auth.logout(request)
+    return render(request, 'admin_login.html')
+
+
+def admin_dashboard(request):
+    # Get all users
+    all_users = User.objects.all()
+
+    # Separate users based on username length
+    employers = []
+    jobseekers = []
+    for user in all_users:
+        if len(user.username) == 4:
+            employers.append(user)
+        elif len(user.username) == 10:
+            jobseekers.append(user)
+
+    return render(request, 'admin_dashboard.html', {'employers': employers, 'jobseekers': jobseekers})
+
+
+def delete_user(request, user_id):
+    if request.method == 'POST':
+        user = User.objects.get(pk=user_id)
+        user.delete()
+        return redirect('admin_dashboard')
+    else:
+        # Handle GET request, if needed
+        pass
+
+
+def user_application_dashboard(request):
+    job_applications = JobApplication.objects.all()
+    return render(request, 'user_application_dashboard.html', {'job_applications': job_applications})
+
+
+def delete_job_application(request, application_id):
+    job_application = get_object_or_404(JobApplication, pk=application_id)
+
+    if request.method == 'POST':
+        job_application.delete()
+        return redirect('user_application_dashboard')
+
+    return render(request, 'confirm_delete.html', {'job_application': job_application})
+
+
+def confirm_delete_application(request, application_id):
+    job_application = get_object_or_404(JobApplication, pk=application_id)
+    return render(request, 'confirm_delete.html', {'job_application': job_application})
+
+
+def send_job_application_email(job_application):
+    """
+    Send an email to the user regarding the status of their job application.
+    """
+    subject = 'Application Accepted'
+    message = 'Your job application has been accepted.'
+    sender_email = 'ssaleem2409@example.com'  # Replace with your email address or use a configured email account
+    recipient_email = job_application.applicant_email  # Assuming you have a field for applicant's email
+
+    send_mail(
+        'Test Subject',
+        'Test message.',
+        'ssaleem2409@example.com',  # Sender's email address
+        ['ssaleem2409@@example.com'],  # Recipient's email address
+        fail_silently=False,
+    )
+
+
+def accept_job_application(request, application_id):
+    job_application = get_object_or_404(JobApplication, pk=application_id)
+
+    if request.method == 'POST':
+        # Mark the application as accepted (you may have a field in your model for this)
+        job_application.accepted = True
+        job_application.save()
+
+        # Send an email to the user
+        send_job_application_email(job_application)
+
+        return redirect('user_application_dashboard')
+
+    return render(request, 'confirm_accept.html', {'job_application': job_application})
+
+
+def confirm_accept_application(request, application_id):
+    job_application = get_object_or_404(JobApplication, pk=application_id)
+    return render(request, 'confirm_accept.html', {'job_application': job_application})
