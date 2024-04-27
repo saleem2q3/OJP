@@ -283,7 +283,7 @@ def send_job_application_email(job_application):
         'Test Subject',
         'Test message.',
         'ssaleem2409@example.com',  # Sender's email address
-        ['ssaleem2409@@example.com'],  # Recipient's email address
+        ['recipient@example.com'],  # Recipient's email address
         fail_silently=False,
     )
 

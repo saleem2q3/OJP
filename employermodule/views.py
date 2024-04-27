@@ -1,6 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.template.loader import render_to_string
+from pyexpat.errors import messages
+from django.contrib import messages
+from django.core.mail import send_mail
+
+from jobseekermodule.views import send_email
 from .models import *
 from jobseekermodule.models import JobApplication
+from employermodule.models import Application
 
 
 # Create your views here.
@@ -72,3 +79,54 @@ def job_applications(request):
     return render(request, 'employermodule/employerlist.html', {'job_applications': job_applications})
 
 
+from django.core.mail import send_mail
+from django.contrib import messages
+from django.shortcuts import render, redirect
+from jobseekermodule.models import JobApplication
+from jobseekermodule.forms import JobApplicationForm
+
+
+def approve_application(request, application_id):
+    application = JobApplication.objects.get(pk=application_id)
+    application.status = 'approved'
+    application.save()
+    approve_notification(request, application)  # Pass the application instance
+    return redirect('employermodule:job_applications')
+
+
+def approve_notification(request, application):
+    messages.success(request, 'Application approved successfully!')
+    send_mail(
+        'Congratulations!',
+        'Your job application has been approved.',
+        'ssaleem2409@gmail.com',  # Replace with your email address
+        [application.email],  # Send email to the applicant
+        fail_silently=False,
+    )
+
+
+def reject_application(request, application_id):
+    application = JobApplication.objects.get(pk=application_id)
+    application.status = 'rejected'
+    application.save()
+    rejection_notification(request, application)  # Pass the application instance
+    return redirect('employermodule:job_applications')
+
+
+def rejection_notification(request, application):
+    messages.error(request, 'Application rejected!')
+    send_mail(
+        'Job Application Rejected',
+        'Your job application has been rejected.',
+        'ssaleem2409@gmail.com',  # Replace with your email address
+        [application.email],  # Send email to the applicant
+        fail_silently=False,
+    )
+
+
+def job_application_list(request):
+    job_applications = JobApplication.objects.all()
+    context = {
+        'job_applications': job_applications
+    }
+    return render(request, 'employermodule/job_application_list.html', context)

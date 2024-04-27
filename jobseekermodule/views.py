@@ -1,6 +1,8 @@
 from employermodule.models import JobDetails
-
-
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+from .models import JobApplication
 def viewjobs(request):
     return render(request, 'jobseekermodule/viewjobs.html')
 
@@ -33,3 +35,7 @@ def submit_application(request):
     else:
         form = JobApplicationForm()
     return render(request, 'submit_application.html', {'form': form})
+
+
+def send_email(subject, recipient_list, message):
+    send_mail(subject, strip_tags(message), None, recipient_list, html_message=message)

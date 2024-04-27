@@ -234,8 +234,8 @@ th {
                             {% endif %}
                         </td>
                         <td>
-                            <a href="#" class="btn btn-success">Approve</a>
-                            <a href="#" class="btn btn-danger"> Reject</a>
+                            <a href="{% url 'employermodule:approve_application' job_application.id %}" class="btn btn-success">Approve</a>
+                            <a href="{% url 'employermodule:reject_application' job_application.id %}" class="btn btn-danger">Reject</a>
                         </td>
                     </tr>
                 {% endfor %}

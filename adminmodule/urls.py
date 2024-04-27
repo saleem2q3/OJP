@@ -29,8 +29,7 @@ urlpatterns = [
     path('delete/<int:application_id>/', views.delete_job_application, name='delete_application'),
     path('confirm_delete/<int:application_id>/', views.confirm_delete_application, name='confirm_delete_application'),
     path('application/<int:application_id>/accept/', views.accept_job_application, name='accept_job_application'),
-    path('application/<int:application_id>/confirm_accept/', views.confirm_accept_application,
-         name='confirm_accept_application'),
+path('application/<int:application_id>/confirm_accept/', views.confirm_accept_application, name='confirm_accept_application'),
     # other URL patterns
 
     path('user_profile', views.user_profile, name='user_profile'),

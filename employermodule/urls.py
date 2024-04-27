@@ -12,6 +12,7 @@ urlpatterns = [
     path('delete/<int:job_id>/', views.delete_job_details, name='delete_job_details'),
     path('employerlist/', views.employerlist, name='employerlist'),
     path('job_applications/', views.job_applications, name='job_applications'),
-
+    path('approve/<int:application_id>/', views.approve_application, name='approve_application'),
+    path('reject/<int:application_id>/', views.reject_application, name='reject_application'),
 
 ]

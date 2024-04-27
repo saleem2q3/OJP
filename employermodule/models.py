@@ -20,3 +20,14 @@ class JobDetails(models.Model):
     def __str__(self):
         return self.work_title
 
+
+class Application(models.Model):
+    applicant_name = models.CharField(max_length=100)
+    applicant_email = models.EmailField()
+    job_applied_for = models.CharField(max_length=100)
+    resume = models.FileField(upload_to='resumes/')
+    profile_image = models.ImageField(upload_to='profile_images/', blank=True, null=True)
+    date_applied = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.applicant_name}'s application for {self.job_applied_for}"
