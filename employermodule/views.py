@@ -95,10 +95,22 @@ def approve_application(request, application_id):
 
 
 def approve_notification(request, application):
-    messages.success(request, 'Application approved successfully!')
+    applicant_name = application.name
     send_mail(
         'Congratulations!',
-        'Your job application has been approved.',
+        f'Hi {applicant_name},\n\nYour job application has been approved.\n\nBest Regards,\nONLINEJOBPORTAL',
+        'ssaleem2409@gmail.com',  # Replace with your email address
+        [application.email],  # Send email to the applicant
+        fail_silently=False,
+    )
+
+
+def rejection_notification(request, application):
+    applicant_name = application.name
+    messages.error(request, f'Sorry {applicant_name}, your application has been rejected.')
+    send_mail(
+        'Job Application Rejected',
+        f'Hi {applicant_name},\n\nWe regret to inform you that your job application has been rejected.\n\nBest Regards,\nONLINEJOBPORTAL',
         'ssaleem2409@gmail.com',  # Replace with your email address
         [application.email],  # Send email to the applicant
         fail_silently=False,
@@ -111,17 +123,6 @@ def reject_application(request, application_id):
     application.save()
     rejection_notification(request, application)  # Pass the application instance
     return redirect('employermodule:job_applications')
-
-
-def rejection_notification(request, application):
-    messages.error(request, 'Application rejected!')
-    send_mail(
-        'Job Application Rejected',
-        'Your job application has been rejected.',
-        'ssaleem2409@gmail.com',  # Replace with your email address
-        [application.email],  # Send email to the applicant
-        fail_silently=False,
-    )
 
 
 def job_application_list(request):
