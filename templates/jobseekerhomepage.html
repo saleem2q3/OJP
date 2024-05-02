@@ -259,52 +259,57 @@
             display: block;
         }
         @media only screen and (max-width: 768px) {
-            .navbar {
-                padding: 10px;
-            }
+    .navbar {
+        padding: 10px;
+    }
 
-            .logo {
-                font-size: 20px;
-            }
+    .logo {
+        font-size: 20px;
+    }
 
-            .nav-links {
-                display: none;
-            }
+    .nav-links {
+        display: none;
+        flex-direction: column; /* Display links vertically on mobile */
+        position: absolute;
+        top: 100%; /* Position dropdown below navbar */
+        left: 0;
+        background-color: #fff; /* Match background color of navbar */
+        width: 100%; /* Occupy full width */
+        padding: 10px; /* Add some padding */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow for better visibility */
+        z-index: 999; /* Ensure links appear above other content */
+    }
 
-            .login-btn {
-                padding: 6px 12px;
-            }
+    .nav-links li {
+        margin-right: 0; /* Reset margin */
+        margin-bottom: 10px; /* Add spacing between links */
+    }
 
-            .content {
-                margin-top: 80px; /* Adjusted to account for fixed navbar */
-                padding: 10px;
-            }
+    .nav-links li a {
+        display: block; /* Make links full-width */
+    }
 
-            .job-portal-images img {
-                width: 100%;
-                margin: 10px 0;
-            }
+    .nav-links li a:hover {
+        color: #ccc;
+    }
 
-            .job-cards {
-                flex-direction: column;
-            }
+    .nav-links.active {
+        display: flex; /* Display links when active */
+    }
 
-            .job-card {
-                width: 100%;
-                margin: 10px 0;
-            }
+    .profile-dropdown {
+        top: auto;
+        bottom: -10px;
+        right: 10px;
+    }
 
-            .profile-dropdown {
-                top: auto;
-                bottom: -10px;
-                right: 10px;
-            }
+    .profile-image {
+        width: 40px; /* Adjust as needed */
+        height: 40px; /* Adjust as needed */
+        border-radius: 50%; /* To make it circular */
+    }
+}
 
-            .profile-image {
-                width: 40px;
-                height: 40px;
-            }
-        }
     </style>
 </head>
 <body>
