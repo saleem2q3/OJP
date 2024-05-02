@@ -7,92 +7,23 @@
     <title>Job Applications</title>
     <style>
         body {
-            background-color: #f2f2f2; /* Changed background color to light gray */
-        }
-
-        table {
-    font-family: Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
-
-th, td {
-    border: 1px solid #ddd;
-    padding: 6px; /* Reduced padding */
-    text-align: left;
-    font-size: 12px; /* Reduced font size */
-}
-
-th {
-    padding-top: 10px; /* Reduced padding */
-    padding-bottom: 10px; /* Reduced padding */
-    background-color: #04AA6D;
-    color: white;
-}
-
-        tr:nth-child(even) {
             background-color: #f2f2f2;
+            margin: 0; /* Reset default margin */
+            padding: 0; /* Reset default padding */
         }
 
-        tr:hover {
-            background-color: #ddd;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 8px 16px;
-            text-align: center;
-            text-decoration: none;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            transition: background-color 0.3s ease;
-            margin-right: 8px; /* Add margin between buttons */
-            margin-bottom: 8px; /* Add margin below buttons */
-        }
-
-        .btn-success {
-            background-color: #4CAF50;
-        }
-
-        .btn-success:hover {
-            background-color: #45a049;
-            animation: pulse 1s infinite; /* Add animation */
-        }
-
-        .btn-danger {
-            background-color: #f44336;
-        }
-
-        .btn-danger:hover {
-            background-color: #da190b;
-            animation: pulse 1s infinite; /* Add animation */
-        }
-
-        /* Keyframes for pulse animation */
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.1);
-            }
-            100% {
-                transform: scale(1);
-            }
-        }
-
+        /* Navbar Styles */
         .navbar {
-            background-color: #ffffff; /* Changed to white */
+            background-color: #ffffff;
             padding: 15px 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            color: #000; /* Black text color */
+            color: #000;
             position: fixed;
             top: 0;
-            width: 99%;
-            z-index: 999; /* Ensuring it stays on top */
+            width: 100%;
+            z-index: 999;
         }
 
         .logo {
@@ -114,30 +45,103 @@ th {
 
         .nav-links li a {
             text-decoration: none;
-            color: #000; /* Black text color */
+            color: #000;
             transition: color 0.3s ease;
         }
 
         .nav-links li a:hover {
-            color: #000; /* Darker gray text color on hover */
+            color: #000;
         }
 
+        /* Content Styles */
         .content {
             padding: 20px;
-            padding-top: 70px; /* Adjusted for the navbar height */
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
+            padding-top: 70px;
         }
 
-       .footer-basic {
+        /* Table Styles */
+        table {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px; /* Adjusted padding */
+            text-align: left;
+            font-size: 14px; /* Adjusted font size */
+        }
+
+        th {
+            padding-top: 12px; /* Adjusted padding */
+            padding-bottom: 12px; /* Adjusted padding */
+            background-color: #04AA6D;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        /* Button Styles */
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+
+        .btn-success {
+            background-color: #4CAF50;
+        }
+
+        .btn-success:hover {
+            background-color: #45a049;
+            animation: pulse 1s infinite;
+        }
+
+        .btn-danger {
+            background-color: #f44336;
+        }
+
+        .btn-danger:hover {
+            background-color: #da190b;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Footer Styles */
+        .footer-basic {
             padding: 40px 0;
             background-color: #ffffff;
             color: #4b4c4d;
             text-align: center;
             width: 100%;
-            margin-top: 50px; /* Added margin to avoid overlapping with footer */
+            margin-top: 20px;
+            position: fixed;
+            bottom: 0;
         }
 
         .footer-basic ul {
@@ -187,6 +191,29 @@ th {
         .footer-basic .social>a:hover {
             opacity: 0.9;
         }
+
+        /* Media Query for Mobile */
+        @media only screen and (max-width: 768px) {
+            .navbar {
+                padding: 10px;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .content {
+                padding-top: 50px;
+            }
+
+            .footer-basic {
+                padding-bottom: 60px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -197,9 +224,7 @@ th {
         </ul>
     </nav>
 
-    <div>
-        <br><br><br><br>
-        {% block body %}
+    <div class="content">
         <h1 align="center">Job Applications</h1>
 
         <table>
@@ -209,7 +234,7 @@ th {
                     <th>Email</th>
                     <th>Job Details</th>
                     <th>Resume</th>
-                    <th>Profile Image</th> <!-- Added profile image header -->
+                    <th>Profile Image</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -241,9 +266,8 @@ th {
                 {% endfor %}
             </tbody>
         </table>
-        {% endblock %}
     </div>
-    <br><br><br>
+
     <div class="footer-basic">
         <footer>
             <div class="social">
