@@ -181,7 +181,9 @@
 
         .service-grid {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column; /* Change to column layout on small screens */
+            justify-content: center;
+            align-items: center;
             padding: 0 20px; /* Add padding to center the cards */
             position: absolute;
             left: 0;
@@ -218,6 +220,63 @@
         .service-description {
             font-size: 14px;
         }
+
+        @media only screen and (max-width: 768px) {
+            /* Adjustments for smaller screens */
+            .logo {
+                font-size: 20px;
+            }
+
+            .navbar {
+                padding: 10px 15px;
+            }
+
+            .nav-links {
+                display: none; /* Hide nav links by default on small screens */
+            }
+
+            .navbar {
+                justify-content: space-between; /* Adjust alignment of navbar items */
+            }
+
+            .nav-links {
+                display: flex; /* Ensure nav-links are displayed */
+                flex-direction: row; /* Display links horizontally on mobile */
+                align-items: center; /* Center align links */
+                margin-top: 20px; /* Add some top margin */
+            }
+
+            .nav-links li {
+                margin-right: 20px; /* Add margin between links */
+            }
+
+            .nav-links li:last-child {
+                margin-right: 0; /* Remove margin from the last link */
+            }
+
+            .nav-links li a {
+                text-decoration: none;
+                color: #000;
+                transition: color 0.3s ease;
+            }
+
+            .nav-links li a:hover {
+                color: #ccc; /* Hover color */
+            }
+
+            .login-btn {
+                padding: 6px 12px;
+            }
+
+            .service-grid {
+                top: unset; /* Remove top position */
+                padding: 0; /* Remove padding */
+            }
+
+            .service-card {
+                width: 80%; /* Adjust card width for smaller screens */
+            }
+        }
     </style>
 </head>
 <body>
@@ -228,7 +287,7 @@
             <li><a href="{% url 'about' %}">About</a></li>
         </ul>
     </nav>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     <section>
         <h2>Contact Form</h2>
         <form action="" method="POST">
@@ -262,7 +321,6 @@
             <div class="service-description">Green Fields, Vaddeswaram, Andhra Pradesh 522302</div>
         </div>
     </div>
-
 
     <div class="footer-basic">
         <footer>

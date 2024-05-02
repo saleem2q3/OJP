@@ -7,7 +7,7 @@
     {% load static %}
     <!-- Include Bootstrap CSS for navbar and footer -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         body {
             padding-bottom: 0;
@@ -16,7 +16,6 @@
 
         .container {
             padding-top: 70px;
-
         }
 
         .navbar {
@@ -43,6 +42,7 @@
             margin: 0;
             padding: 0;
             display: flex;
+            justify-content: flex-end; /* Align links to the right */
         }
 
         .nav-links li {
@@ -59,7 +59,6 @@
             background-color: #ffffff;
             color: #4b4c4d;
             text-align: center;
-            width: 100%;
         }
 
         .footer-basic ul {
@@ -122,11 +121,16 @@
 </head>
 <body>
     <!-- Navbar -->
-    <nav class="navbar">
+    <nav class="navbar navbar-expand-lg">
         <div class="logo">OJP</div>
-        <ul class="nav-links">
-            <li><a href="{% url 'jobseekerhomepage' %}">Home</a></li>
-        </ul>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="nav-links">
+                <li><a href="{% url 'jobseekerhomepage' %}">Home</a></li>
+            </ul>
+        </div>
     </nav>
 
     <!-- Content -->
@@ -182,7 +186,7 @@
 </div>
 </body>
 </html>
-    <!-- Include Bootstrap JS for navbar toggling -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2"></script>
+<!-- Include Bootstrap JS for navbar toggling -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

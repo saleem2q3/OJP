@@ -7,7 +7,7 @@
     {% load static %}
     <!-- Include Bootstrap CSS for navbar and footer -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <style>
         /* Custom styles */
@@ -22,7 +22,7 @@
 
         .navbar {
             background-color: white; /* Red color */
-            color: #fff;
+            color: #000; /* Changed navbar text color */
             padding: 15px 20px;
             display: flex;
             justify-content: space-between;
@@ -115,11 +115,18 @@
 </head>
 <body>
     <!-- Navbar -->
-    <nav class="navbar">
-        <div class="logo">OJP</div>
-        <ul class="nav-links">
-            <li><a href="{% url 'employerhomepage' %}">Home</a></li>
-        </ul>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand logo" href="#">OJP</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto nav-links">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'employerhomepage' %}">Home</a>
+                </li>
+            </ul>
+        </div>
     </nav>
 
     <br><br><br>
@@ -138,7 +145,7 @@
                         <p class="card-text">Education: {{ job_details.education }}</p>
                         <p class="card-text">Work Location: {{ job_details.work_location }}</p>
                         <p class="card-text">Required Skills: {{ job_details.required_skills }}</p>
-                        <p class="card-text">experience: {{ job_details.experience }}</p>
+                        <p class="card-text">Experience: {{ job_details.experience }}</p>
                         <a href="{% url 'employermodule:edit_job_details' job_details.id %}" class="btn btn-primary">Edit</a>
                         <a href="{% url 'employermodule:delete_job_details' job_details.id %}" class="btn btn-danger">Delete</a>
                     </div>
@@ -149,28 +156,28 @@
     </div>
 
     <!-- Footer -->
-   <div class="footer-basic">
-    <footer>
-        <div class="social">
-            <a href="#"><i class="fa fa-facebook"></i></a>
-            <a href="#"><i class="fa fa-google"></i></a>
-            <a href="#"><i class="fa fa-linkedin"></i></a>
-            <a href="#"><i class="fa fa-instagram"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-        </div>
-        <ul class="list-inline">
-            <li class="list-inline-item"><a href="#">Home</a></li>
-            <li class="list-inline-item"><a href="#">Services</a></li>
-            <li class="list-inline-item"><a href="#">About</a></li>
-            <li class="list-inline-item"><a href="#">Terms</a></li>
-            <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
-        </ul>
-        <br><br><br>
-        <center>
-            <p>&copy; 2024 Job Portal. All rights reserved.</p>
-        </center>
-    </footer>
-</div>
+    <div class="footer-basic">
+        <footer>
+            <div class="social">
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-google"></i></a>
+                <a href="#"><i class="fa fa-linkedin"></i></a>
+                <a href="#"><i class="fa fa-instagram"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+            </div>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="#">Home</a></li>
+                <li class="list-inline-item"><a href="#">Services</a></li>
+                <li class="list-inline-item"><a href="#">About</a></li>
+                <li class="list-inline-item"><a href="#">Terms</a></li>
+                <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+            </ul>
+            <br><br><br>
+            <center>
+                <p>&copy; 2024 Job Portal. All rights reserved.</p>
+            </center>
+        </footer>
+    </div>
 
     <!-- Include Bootstrap JS for navbar toggling -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
