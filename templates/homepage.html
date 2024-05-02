@@ -202,14 +202,17 @@
 
     .nav-links {
         display: flex; /* Ensure nav-links are displayed */
-        flex-direction: column; /* Display links vertically on mobile */
+        flex-direction: row; /* Display links horizontally on mobile */
         align-items: center; /* Center align links */
         margin-top: 20px; /* Add some top margin */
     }
 
     .nav-links li {
-        margin-right: 0; /* Reset margin */
-        margin-bottom: 10px; /* Add spacing between links */
+        margin-right: 20px; /* Add margin between links */
+    }
+
+    .nav-links li:last-child {
+        margin-right: 0; /* Remove margin from the last link */
     }
 
     .nav-links li a {

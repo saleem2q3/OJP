@@ -259,60 +259,63 @@
             display: block;
         }
         @media only screen and (max-width: 768px) {
-    .navbar {
-        padding: 10px;
-    }
-
     .logo {
         font-size: 20px;
     }
 
-    .nav-links {
-        display: flex; /* Ensure that nav links are displayed on mobile */
-        flex-direction: column; /* Display links vertically on mobile */
-        position: absolute;
-        top: 100%; /* Position dropdown below navbar */
-        left: 0;
-        background-color: #fff; /* Match background color of navbar */
-        width: 100%; /* Occupy full width */
-        padding: 10px; /* Add some padding */
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow for better visibility */
-        z-index: 999; /* Ensure links appear above other content */
-        transition: all 0.3s ease; /* Add transition effect for smoother animation */
-        opacity: 0; /* Initially hide the links */
-        visibility: hidden; /* Initially hide the links */
+    .navbar {
+        padding: 10px 15px;
     }
 
-    .nav-links.active {
-        opacity: 1; /* Show the links when active */
-        visibility: visible; /* Show the links when active */
+    .nav-links {
+        display: flex; /* Ensure nav-links are displayed */
+        flex-direction: row; /* Display links horizontally on mobile */
+        align-items: center; /* Center align links */
+        margin-top: 20px; /* Add some top margin */
     }
 
     .nav-links li {
-        margin-right: 0; /* Reset margin */
-        margin-bottom: 10px; /* Add spacing between links */
+        margin-right: 20px; /* Add margin between links */
+    }
+
+    .nav-links li:last-child {
+        margin-right: 0; /* Remove margin from the last link */
     }
 
     .nav-links li a {
-        display: block; /* Make links full-width */
+        text-decoration: none;
+        color: #000;
+        transition: color 0.3s ease;
     }
 
     .nav-links li a:hover {
-        color: #ccc;
+        color: #999; /* Hover color */
     }
 
-    .profile-dropdown {
-        top: auto;
-        bottom: -10px;
-        right: 10px;
+    .login-btn {
+        padding: 6px 12px;
     }
 
-    .profile-image {
-        width: 40px; /* Adjust as needed */
-        height: 40px; /* Adjust as needed */
-        border-radius: 50%; /* To make it circular */
+    .big-image {
+        height: 70vh;
+    }
+
+    .title {
+        font-size: 2.5em;
+    }
+
+    .description {
+        font-size: 1.2em;
+    }
+
+    .footer-basic .social>a {
+        font-size: 20px;
+        width: 35px;
+        height: 35px;
+        line-height: 35px;
     }
 }
+
     </style>
 </head>
 <body>
