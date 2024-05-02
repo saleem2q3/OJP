@@ -258,31 +258,65 @@
         .profile-dropdown:hover .dropdown-content {
             display: block;
         }
-          @media only screen and (max-width: 768px) {
-            .nav-links {
-                display: none; /* Hide nav links by default on small screens */
-            }
+        @media only screen and (max-width: 768px) {
+    /* Adjustments for smaller screens */
+    .logo {
+        font-size: 20px;
+    }
 
-            .navbar {
-                justify-content: space-between; /* Adjust alignment of navbar items */
-            }
+    .navbar {
+        padding: 10px 15px;
+    }
 
-            .logo {
-                margin-left: 10px; /* Adjust logo margin */
-            }
-            .nav-links li {
-                display: block; /* Display nav links vertically */
-                margin: 10px 0; /* Add margin between nav links */
-            }
+    .nav-links {
+        display: flex; /* Ensure nav-links are displayed */
+        flex-direction: row; /* Display links horizontally on mobile */
+        align-items: center; /* Center align links */
+        margin-top: 20px; /* Add some top margin */
+    }
 
-            .nav-links li a {
-                font-size: 16px; /* Adjust font size of nav links */
-            }
+    .nav-links li {
+        margin-right: 20px; /* Add margin between links */
+    }
 
-            .profile-dropdown {
-                display: none; /* Hide profile dropdown on small screens */
-            }
-        }
+    .nav-links li:last-child {
+        margin-right: 0; /* Remove margin from the last link */
+    }
+
+    .nav-links li a {
+        text-decoration: none;
+        color: #000;
+        transition: color 0.3s ease;
+    }
+
+    .nav-links li a:hover {
+        color: #999; /* Hover color */
+    }
+
+    .login-btn {
+        padding: 6px 12px;
+    }
+
+    .big-image {
+        height: 70vh;
+    }
+
+    .title {
+        font-size: 2.5em;
+    }
+
+    .description {
+        font-size: 1.2em;
+    }
+
+    .footer-basic .social>a {
+        font-size: 20px;
+        width: 35px;
+        height: 35px;
+        line-height: 35px;
+    }
+}
+
     </style>
 </head>
 <body>
