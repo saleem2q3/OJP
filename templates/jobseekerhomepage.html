@@ -258,6 +258,53 @@
         .profile-dropdown:hover .dropdown-content {
             display: block;
         }
+        @media only screen and (max-width: 768px) {
+            .navbar {
+                padding: 10px;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .login-btn {
+                padding: 6px 12px;
+            }
+
+            .content {
+                margin-top: 80px; /* Adjusted to account for fixed navbar */
+                padding: 10px;
+            }
+
+            .job-portal-images img {
+                width: 100%;
+                margin: 10px 0;
+            }
+
+            .job-cards {
+                flex-direction: column;
+            }
+
+            .job-card {
+                width: 100%;
+                margin: 10px 0;
+            }
+
+            .profile-dropdown {
+                top: auto;
+                bottom: -10px;
+                right: 10px;
+            }
+
+            .profile-image {
+                width: 40px;
+                height: 40px;
+            }
+        }
     </style>
 </head>
 <body>

@@ -277,6 +277,27 @@
             background-color: #ffcccc;
             color: #cc0000;
         }
+        @media only screen and (max-width: 768px) {
+            .background {
+                flex-direction: column; /* Adjusted flex-direction */
+                padding: 20px; /* Adjusted padding */
+                height: auto; /* Removed fixed height */
+            }
+
+            .left-info {
+                text-align: center; /* Center align on small screens */
+                padding: 20px 0; /* Adjusted padding */
+            }
+
+            .content {
+                align-items: flex-start; /* Adjusted alignment */
+            }
+
+            .login-card {
+                width: 100%;
+                margin-top: 20px; /* Added margin */
+            }
+        }
     </style>
 </head>
 <body>
