@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +7,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-       <style>
+        <style>
             /* Your existing CSS styles */
             body {
                 margin: 0;
@@ -193,48 +191,69 @@
             .footer-basic .social>a:hover {
                 opacity: 0.9;
             }
-        @media only screen and (max-width: 768px) {
-            .logo {
-                font-size: 20px;
-            }
+            @media only screen and (max-width: 768px) {
+    .logo {
+        font-size: 20px;
+    }
 
-            .navbar {
-                padding: 10px 15px;
-            }
+    .navbar {
+        padding: 10px 15px;
+    }
 
-            .nav-links {
-                display: none;
-            }
+    .nav-links {
+        display: flex; /* Ensure nav-links are displayed */
+        flex-direction: column; /* Display links vertically on mobile */
+        align-items: center; /* Center align links */
+        margin-top: 20px; /* Add some top margin */
+    }
 
-            .login-btn {
-                padding: 6px 12px;
-            }
+    .nav-links li {
+        margin-right: 0; /* Reset margin */
+        margin-bottom: 10px; /* Add spacing between links */
+    }
 
-            .big-image {
-                height: 70vh;
-            }
+    .nav-links li a {
+        text-decoration: none;
+        color: #000;
+        transition: color 0.3s ease;
+    }
 
-            .title {
-                font-size: 2.5em;
-            }
+    .nav-links li a:hover {
+        color: #999; /* Hover color */
+    }
 
-            .description {
-                font-size: 1.2em;
-            }
+    .login-btn {
+        padding: 6px 12px;
+    }
 
-            .footer-basic .social>a {
-                font-size: 20px;
-                width: 35px;
-                height: 35px;
-                line-height: 35px;
-            }
-        }
-    </style>
+    .big-image {
+        height: 70vh;
+    }
+
+    .title {
+        font-size: 2.5em;
+    }
+
+    .description {
+        font-size: 1.2em;
+    }
+
+    .footer-basic .social>a {
+        font-size: 20px;
+        width: 35px;
+        height: 35px;
+        line-height: 35px;
+    }
+}
+
+
+        </style>
 </head>
 
 <body>
+    <div class="background"></div>
     <nav class="navbar" id="navbar">
-        <div class="logo"><a href="{% url 'homepage' %}" style="color: black;">OJP</a></div>
+<div class="logo"><a href="{% url 'homepage' %}" style="color: black;">OJP</a></div>
         <ul class="nav-links">
             <li><a href="{% url 'homepage' %}">Home</a></li>
             <li><a href="{% url 'about' %}">About</a></li>
@@ -242,21 +261,23 @@
         </ul>
         <a href="{% url 'login' %}" class="login-btn"><i class=""></i>Login</a>
     </nav>
-    <br><br><br>
+  <br><br><br>
     <div class="content">
         <div class="big-image">
             <img src="https://www.iprs.org/wp-content/uploads/2019/11/faq_title.jpg" alt="Big Image">
             <div class="overlay">
                 <h1 class="title">Find your jobs here</h1>
-                <p class="description">Various career opportunities await you. Find the right career and connect with companies Anytime, Anywhere</p>
+                <p class="description">Various career opportunities await you.Find the right career and connect with companies Anytime,Anywhere</p>
                 <a href="{% url 'read' %}" class="btn-discover">Learn More...</a>
             </div>
         </div>
     </div>
 
+
     <!-- Footer Section -->
     <div class="footer-basic">
         <footer>
+
             <div class="social"><a href="#"><i class="fa fa-facebook"></i></a><a href="https://www.google.co.in/"><i class="fa fa-google"></i></a><a
                     href="https://www.linkedin.com/in/vamsi-krishna-gondu-0bba5124b/?originalSubdomain=in"><i class="fa fa-linkedin"></i></a><a href="https://www.instagram.com/"><i class="fa fa-instagram"></i></a><a href="#"><i class="fa fa-twitter"></i></a></div>
             <ul class="list-inline">
@@ -272,7 +293,6 @@
             </center>
         </footer>
     </div>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
     <script>

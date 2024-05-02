@@ -268,7 +268,7 @@
     }
 
     .nav-links {
-        display: none;
+        display: flex; /* Ensure that nav links are displayed on mobile */
         flex-direction: column; /* Display links vertically on mobile */
         position: absolute;
         top: 100%; /* Position dropdown below navbar */
@@ -278,6 +278,14 @@
         padding: 10px; /* Add some padding */
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow for better visibility */
         z-index: 999; /* Ensure links appear above other content */
+        transition: all 0.3s ease; /* Add transition effect for smoother animation */
+        opacity: 0; /* Initially hide the links */
+        visibility: hidden; /* Initially hide the links */
+    }
+
+    .nav-links.active {
+        opacity: 1; /* Show the links when active */
+        visibility: visible; /* Show the links when active */
     }
 
     .nav-links li {
@@ -293,10 +301,6 @@
         color: #ccc;
     }
 
-    .nav-links.active {
-        display: flex; /* Display links when active */
-    }
-
     .profile-dropdown {
         top: auto;
         bottom: -10px;
@@ -309,7 +313,6 @@
         border-radius: 50%; /* To make it circular */
     }
 }
-
     </style>
 </head>
 <body>
