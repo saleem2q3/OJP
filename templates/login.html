@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>OJP login form</title>
@@ -298,6 +300,34 @@
                 margin-top: 20px; /* Added margin */
             }
         }
+      .google-btn,
+.facebook-btn {
+    display: inline-block;
+    width: 25%; /* Make the buttons 100% width of their container */
+    height: auto; /* Allow height to adjust based on the content */
+    box-shadow: 0 2px 2px rgba(0, 0, 0, .25);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    text-decoration: none;
+    margin-bottom: 10px; /* Add some spacing between the buttons */
+}
+
+.google-btn:hover,
+.facebook-btn:hover {
+    background-color: #f2f2f2;
+    transform: translateY(-2px);
+}
+
+.google-btn img,
+.facebook-btn img {
+    width: 100%; /* Make the images fill the button */
+    height: auto; /* Allow height to adjust based on the content */
+    display: block;
+    object-fit: cover; /* Ensure the image covers the entire button */
+}
+
+
     </style>
 </head>
 <body>
@@ -321,7 +351,18 @@
 
     <div class="content">
         <div class="login-card">
-            <h2>Login</h2>
+            <h3>Use Social Media Credentials</h3>
+          <a href="#" id="button_google" class="google-btn oauth_button">
+            <img src="https://1000logos.net/wp-content/uploads/2016/11/google-logo.jpg" alt="Google Logo">
+        </a>
+        <a href="#" id="button_facebook" class="facebook-btn oauth_button">
+            <img src="https://cdn.logojoy.com/wp-content/uploads/20230921104408/Facebook-logo-600x319.png" alt="Facebook Logo">
+        </a>
+
+            <br>
+        ----------------------------or-------------------------
+            <h2 align= "centre">Login</h2>
+
             <form class="login-form" action="{% url 'login1' %}" method="post">
                 {% csrf_token %}
                 <label for="username">Username must be either 4 or 10 digits long:</label>
@@ -349,6 +390,16 @@
         </div>
 
         <div class="signup-card" style="display: none;">
+            <h3>Signup Using Social Media Credentials</h3>
+<a href="#" id="signup_google" class="google-btn oauth_button">
+    <img src="https://1000logos.net/wp-content/uploads/2016/11/google-logo.jpg" alt="Google Logo">
+</a>
+<a href="#" id="signup_facebook" class="facebook-btn oauth_button">
+    <img src="https://cdn.logojoy.com/wp-content/uploads/20230921104408/Facebook-logo-600x319.png" alt="Facebook Logo">
+</a>
+
+              <br>
+        ----------------------------or-------------------------
             <h2>Signup</h2>
             <form class="signup-form" action="{% url 'signup1' %}" method="post">
                 {% csrf_token %}
@@ -387,6 +438,10 @@
             {% endfor %}
         {% endif %}
         </div>
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+        <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div>
+
+
     </div>
 </div>
 
@@ -446,6 +501,17 @@
             }
         });
     });
+     function onSignIn(googleUser) {
+        // Get user profile information
+        var profile = googleUser.getBasicProfile();
+        console.log('ID: ' + profile.getId()); // Do something with the user ID
+        console.log('Name: ' + profile.getName()); // Do something with the user's name
+        console.log('Email: ' + profile.getEmail()); // Do something with the user's email
+        // You can also send this information to your server using AJAX to authenticate the user
+    }
+     function onSignInClick() {
+        gapi.auth2.getAuthInstance().signIn();
+    }
 </script>
 
 </body>
