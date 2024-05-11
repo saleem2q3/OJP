@@ -73,6 +73,15 @@
                 width: auto; /* Adjusted width */
             }
         }
+   textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 20px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            resize: vertical; /* Allow vertical resizing */
+        }
     </style>
 </head>
 <body>
@@ -94,6 +103,22 @@
 
         <label for="profile_image">Profile Image:</label><br>
         <input type="file" id="profile_image" name="profile_image" accept="image/*"><br>
+
+        <!-- New fields -->
+        <label for="cover_letter">Cover Letter:</label><br>
+        <textarea id="cover_letter" name="cover_letter" rows="4"></textarea><br>
+
+        <label for="personal_information">Personal Information:</label><br>
+        <textarea id="personal_information" name="personal_information" rows="4"></textarea><br>
+
+        <label for="work_history">Work History:</label><br>
+        <textarea id="work_history" name="work_history" rows="4"></textarea><br>
+
+        <label for="portfolio">Portfolio:</label><br>
+        <input type="file" id="portfolio" name="portfolio" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg"><br>
+
+        <label for="additional_documents">Additional Documents:</label><br>
+        <input type="file" id="additional_documents" name="additional_documents" multiple accept=".pdf,.doc,.docx"><br>
 
         <input type="submit" value="Submit">
     </form>

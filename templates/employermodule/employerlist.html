@@ -140,7 +140,6 @@
             text-align: center;
             width: 100%;
             margin-top: 20px;
-            position: fixed;
             bottom: 0;
         }
 
@@ -192,28 +191,7 @@
             opacity: 0.9;
         }
 
-        /* Media Query for Mobile */
-        @media only screen and (max-width: 768px) {
-            .navbar {
-                padding: 10px;
-            }
 
-            .logo {
-                font-size: 20px;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .content {
-                padding-top: 50px;
-            }
-
-            .footer-basic {
-                padding-bottom: 60px;
-            }
-        }
     </style>
 </head>
 <body>
@@ -235,6 +213,11 @@
                     <th>Job Details</th>
                     <th>Resume</th>
                     <th>Profile Image</th>
+                    <th>Cover Letter</th>
+                    <th>Personal Information</th>
+                    <th>Work History</th>
+                    <th>Portfolio</th>
+                    <th>Additional Documents</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -258,6 +241,25 @@
                                 No profile image
                             {% endif %}
                         </td>
+                        <!-- New columns for additional fields -->
+                        <td>{{ job_application.cover_letter }}</td>
+                        <td>{{ job_application.personal_information }}</td>
+                        <td>{{ job_application.work_history }}</td>
+                        <td>
+                            {% if job_application.portfolio %}
+                                <a href="{{ job_application.portfolio.url }}" target="_blank">Download Portfolio</a>
+                            {% else %}
+                                No portfolio uploaded
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if job_application.additional_documents %}
+                                <a href="{{ job_application.additional_documents.url }}" target="_blank">Download Documents</a>
+                            {% else %}
+                                No additional documents uploaded
+                            {% endif %}
+                        </td>
+                        <!-- Action buttons -->
                         <td>
                             <a href="{% url 'employermodule:approve_application' job_application.id %}" class="btn btn-success">Approve</a>
                             <a href="{% url 'employermodule:reject_application' job_application.id %}" class="btn btn-danger">Reject</a>
@@ -267,7 +269,6 @@
             </tbody>
         </table>
     </div>
-
     <div class="footer-basic">
         <footer>
             <div class="social">

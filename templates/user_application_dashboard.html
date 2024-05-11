@@ -103,6 +103,11 @@
                 <th>Job Details</th>
                 <th>Resume</th>
                 <th>Profile Image</th>
+                <th>Cover Letter</th>
+                <th>Personal Information</th>
+                <th>Work History</th>
+                <th>Portfolio</th>
+                <th>Additional Documents</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -124,6 +129,24 @@
                         <img src="{{ job_application.profile_image.url }}" alt="Profile Image" style="max-width: 100px; max-height: 100px;">
                     {% else %}
                         No profile image
+                    {% endif %}
+                </td>
+                <!-- Add columns for additional details -->
+                <td>{{ job_application.cover_letter }}</td>
+                <td>{{ job_application.personal_information }}</td>
+                <td>{{ job_application.work_history }}</td>
+                <td>
+                    {% if job_application.portfolio %}
+                        <a href="{{ job_application.portfolio.url }}" target="_blank">Download Portfolio</a>
+                    {% else %}
+                        No portfolio uploaded
+                    {% endif %}
+                </td>
+                <td>
+                    {% if job_application.additional_documents %}
+                        <a href="{{ job_application.additional_documents.url }}" target="_blank">Download Documents</a>
+                    {% else %}
+                        No additional documents uploaded
                     {% endif %}
                 </td>
                 <td>
