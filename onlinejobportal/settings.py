@@ -56,8 +56,6 @@ MIDDLEWARE = [
     'allauth.account.middleware.AccountMiddleware',  # Add this line
 ]
 
-
-
 ROOT_URLCONF = 'onlinejobportal.urls'
 
 TEMPLATES = [
@@ -88,7 +86,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # DATABASES = {
 #     'default': {
