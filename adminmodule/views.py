@@ -56,73 +56,47 @@ def signup(request):
 
 def signup1(request):
     if request.method == 'POST':
-        if 'continue_with_google' in request.POST:
-            # Handle sign up using Google
-            email = request.POST.get('email', '').lower()
-            first_name = request.POST.get('first_name', '')
-            last_name = request.POST.get('last_name', '')
-            username = email.split('@')[0]  # Using email as username (can be modified as per your requirements)
+        username = request.POST['username']
+        email = request.POST['email'].lower()
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        pass1 = request.POST['password']
+        pass2 = request.POST['password1']
 
-            if User.objects.filter(email=email).exists():
-                messages.error(request, 'User with this email already exists. Please login.')
-                return redirect('login')
+        password_pattern = r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
 
-            user = User.objects.create_user(username=username, email=email, first_name=first_name, last_name=last_name)
-            user.save()
+        if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
+            messages.error(request, 'Invalid Email Format')
+            return render(request, 'signup.html')
 
-            auth.login(request, user)
-            return redirect('homepage')
+        if not re.match(password_pattern, pass1):
+            messages.error(request,
+                           'Password must contain at least 8 characters, including one uppercase letter, '
+                           'one lowercase letter, one digit, and one special character.')
+            return render(request, 'signup.html')
 
-        elif 'continue_with_facebook' in request.POST:
-            # Handle sign up using Facebook
-            # Similar logic as above
-            # You can extract data from the request and generate a username
-            # After creating the user, log in the user and redirect to the homepage
-            pass  # Placeholder for the Facebook sign up logic
+        if pass1 != pass2:
+            messages.error(request, 'Passwords do not match')
+            return render(request, 'signup.html')
 
-        else:
-            # Handle sign up using the traditional signup form
-            username = request.POST['username']
-            email = request.POST['email'].lower()
-            first_name = request.POST['first_name']
-            last_name = request.POST['last_name']
-            pass1 = request.POST['password']
-            pass2 = request.POST['password1']
+        if not re.match(r'^\d{4}$|^\d{10}$', username):
+            messages.error(request, 'Username must be 4 or 10 digits long')
+            return render(request, 'signup.html')
 
-            password_pattern = r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+        if User.objects.filter(username=username).exists():
+            messages.error(request, 'Username is already taken.')
+            return render(request, 'signup.html')
 
-            if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
-                messages.error(request, 'Invalid Email Format')
-                return render(request, 'signup.html')
+        if User.objects.filter(email=email).exists():
+            messages.error(request, 'Email is already registered.')
+            return render(request, 'signup.html')
 
-            if not re.match(password_pattern, pass1):
-                messages.error(request,
-                               'Password must contain at least 8 characters, including one uppercase letter, '
-                               'one lowercase letter, one digit, and one special character.')
-                return render(request, 'signup.html')
+        user = User.objects.create_user(username=username, email=email, password=pass1, first_name=first_name,
+                                        last_name=last_name)
+        user.save()
 
-            if pass1 != pass2:
-                messages.error(request, 'Passwords do not match')
-                return render(request, 'signup.html')
-
-            if not re.match(r'^\d{4}$|^\d{10}$', username):
-                messages.error(request, 'Username must be 4 or 10 digits long')
-                return render(request, 'signup.html')
-
-            if User.objects.filter(username=username).exists():
-                messages.error(request, 'Username is already taken.')
-                return render(request, 'signup.html')
-
-            if User.objects.filter(email=email).exists():
-                messages.error(request, 'Email is already registered.')
-                return render(request, 'signup.html')
-
-            user = User.objects.create_user(username=username, email=email, password=pass1, first_name=first_name,
-                                            last_name=last_name)
-            user.save()
-
-            messages.success(request, 'Account created successfully. Please log in.')
-            return redirect('login')
+        messages.success(request, 'Account created successfully. Please log in.')
+        return redirect('login')
 
     return render(request, 'signup.html')
 
@@ -131,7 +105,7 @@ def login1(request):
     if request.method == 'POST':
         username = request.POST['username']
         pass1 = request.POST['password']
-        user = auth.authenticate(request, username=username, password=pass1)
+        user = authenticate(request, username=username, password=pass1)
 
         if user is not None:
             stored_email = user.email.lower()
@@ -149,6 +123,7 @@ def login1(request):
                 messages.error(request, 'Invalid Email')
                 return render(request, 'login.html')
         else:
+            # Check if the username exists
             if User.objects.filter(username=username).exists():
                 messages.error(request, 'Invalid Password')
             else:
@@ -157,6 +132,7 @@ def login1(request):
 
     else:
         return render(request, 'login.html')
+
 
 def logout(request):
     auth.logout(request)
