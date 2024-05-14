@@ -438,10 +438,6 @@
             {% endfor %}
         {% endif %}
         </div>
-        <div class="g-signin2" data-onsuccess="onSignIn"></div>
-        <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div>
-
-
     </div>
 </div>
 
@@ -469,7 +465,7 @@
 </div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
+      document.addEventListener("DOMContentLoaded", function() {
         const loginCard = document.querySelector(".login-card");
         const signupCard = document.querySelector(".signup-card");
         const loginLink = document.querySelector(".login-link");
@@ -501,17 +497,6 @@
             }
         });
     });
-     function onSignIn(googleUser) {
-        // Get user profile information
-        var profile = googleUser.getBasicProfile();
-        console.log('ID: ' + profile.getId()); // Do something with the user ID
-        console.log('Name: ' + profile.getName()); // Do something with the user's name
-        console.log('Email: ' + profile.getEmail()); // Do something with the user's email
-        // You can also send this information to your server using AJAX to authenticate the user
-    }
-     function onSignInClick() {
-        gapi.auth2.getAuthInstance().signIn();
-    }
 </script>
 
 </body>
