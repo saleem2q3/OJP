@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <title>CAREER CONNECT || Signup Page</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="{% static 'images/logo.png' %}" type="image/x-icon">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet"/>
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet"/>
+
+    <link href="lib/animate/animate.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+    <style>
+        body {
+            background-color: #f6f8fb;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 110vh;
+        }
+
+        .signup-box {
+            display: flex;
+            width: 900px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .illustration {
+            width: 55%;
+            background-color: #5267df;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .illustration img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .form-section {
+            width: 60%;
+            padding: 40px;
+        }
+
+        .form-section h3 {
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .form-group label {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .form-control {
+            background-color: #f2f4f8;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        .btn-submit {
+            background-color: #5267df;
+            color: white;
+            font-weight: bold;
+            padding: 10px;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        .btn-submit:hover {
+            background-color: #4156d3;
+        }
+
+        .signup-text {
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .signup-text a {
+            color: #5267df;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .signup-text a:hover {
+            text-decoration: underline;
+        }
+
+        .logo {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .logo img {
+            width: 200px;
+        }
+ .social-login {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+    }
+
+    .social-login a {
+      margin: 0 10px;
+      color: #5267df;
+      font-size: 20px;
+    }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="signup-box">
+            <!-- Illustration Section -->
+            <div class="illustration">
+                <img src="{% static 'images/login.png' %}" alt="Illustration">
+            </div>
+
+            <!-- Signup Form Section -->
+            <div class="form-section">
+                <div class="logo">
+                    <img src="{% static 'images/cc.png' %}" alt="Logo">
+                </div>
+                <h3>Create an Account</h3>
+
+                <form method="POST" action="{% url 'employer_signup' %}">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="username">Username</label>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Username">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="first_name">First Name</label>
+                            <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="last_name">Last Name</label>
+                            <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="password1">Confirm Password</label>
+                            <input type="password" class="form-control" id="password1" name="password1" placeholder="Confirm Password">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-submit">Sign Up</button>
+                </form>
+
+                <div class="social-login">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-google"></i></a>
+        </div>
+<br>
+                <div class="signup-text">
+                    <p>Already have an account? <a href="{% url 'employer_login' %}">Login here</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

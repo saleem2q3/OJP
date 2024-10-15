@@ -1,327 +1,462 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Employer Homepage</title>
+    <link rel="icon" href="{% static 'images/logo.png' %}" type="image/x-icon">
+    <title>Job Search</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <style>
-        body {
+        * {
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
-            background-image: url('https://dresma.ai/wp-content/uploads/2022/07/cover_5july-01-01-1024x481.png');
-            background-size: cover;
-            background-position: center;
+            box-sizing: border-box;
         }
 
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            backdrop-filter: blur(5px);
-            z-index: -1;
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #e8f1f7;
+            color: #333;
         }
 
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 98%;
-            z-index: 1000;
-            background-color: #fff;
-            padding: 15px 20px;
+        header {
+            padding: 20px;
+            background-color: transparent;
+        }
+
+        nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            color: #000;
-            transition: background-color 0.5s ease;
         }
 
         .logo {
-            font-size: 24px;
-            font-weight: bold;
+            font-size: 28px;
+            font-weight: 600;
         }
 
         .nav-links {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
+            list-style: none;
             display: flex;
-            align-items: center;
+            gap: 20px;
         }
 
-        .nav-links li {
-            margin-right: 20px;
-        }
-
-        .nav-links li a {
+        .nav-links a {
             text-decoration: none;
-            color: #000;
-            transition: color 0.3s ease;
+            color: #333;
         }
 
-        .nav-links li a:hover {
-            color: #ccc;
-        }
-
-        .profile-dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        .profile-image {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 120px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-            top: 100%;
-            right: 0;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-
-        .dropdown-content a:hover {
-            background-color: #f1f1f1;
-        }
-
-        .profile-dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        .login-btn {
-            background-color: #ff0000;
-            color: #fff;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, color 0.3s ease;
-            text-decoration: none;
-            animation: buttonAnimation 0.5s ease forwards;
-        }
-
-        .login-btn:hover {
-            background-color: #fff;
-            color: #ff0000;
-        }
-
-        .content {
-            padding: 20px;
-            text-align: center;
-            margin-top: 100px;
-        }
-
-        .search-container {
+        .job-search-section {
             display: flex;
-            justify-content: center;
-            margin-top: 50px;
+            justify-content: space-between;
+            width: 80%;
+            margin: auto;
+            padding: 50px 0;
+        }
+
+        .content-left {
+            max-width: 50%;
+        }
+
+        .content-left h1 {
+            font-size: 48px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+        }
+
+        .content-left p {
+            font-size: 18px;
+            margin-bottom: 30px;
         }
 
         .search-bar {
-            width: 500px;
-            padding: 10px;
-            border: none;
-            border-radius: 20px;
-            outline: none;
-            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 40px;
         }
 
-        .search-bar:focus {
-            width: 600px;
-        }
-
-        .search-btn {
-            background-color: #ff0000;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, color 0.3s ease;
-            margin-left: 10px;
-        }
-
-        .search-btn:hover {
-            background-color: #fff;
-            color: #ff0000;
-        }
-
-        .btn-discover {
-            background-color: #ff0000;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        .btn-discover:hover {
-            background-color: #fff;
-            color: #ff0000;
-        }
-
-        .footer-basic {
-            padding: 40px 0;
-            background-color: #ffffff;
-            color: #4b4c4d;
-        }
-
-        .footer-basic ul {
-            padding: 0;
-            list-style: none;
-            text-align: center;
-            font-size: 18px;
-            line-height: 1.6;
-            margin-bottom: 0;
-        }
-
-        .footer-basic li {
-            display: inline;
-            padding: 0 10px;
-        }
-
-        .footer-basic ul a {
-            color: inherit;
-            text-decoration: none;
-            opacity: 0.8;
-        }
-
-        .footer-basic ul a:hover {
-            opacity: 1;
-        }
-
-        .footer-basic .social {
-            text-align: center;
-            padding-bottom: 25px;
-        }
-
-        .footer-basic .social>a {
-            font-size: 24px;
-            width: 40px;
-            height: 40px;
-            line-height: 40px;
-            display: inline-block;
-            text-align: center;
-            border-radius: 50%;
+        .search-bar input,
+        .search-bar select {
+            padding: 15px;
+            border-radius: 50px;
             border: 1px solid #ccc;
-            margin: 0 8px;
-            color: inherit;
-            opacity: 0.75;
+            width: 220px;
         }
 
-        .footer-basic .social>a:hover {
-            opacity: 0.9;
+        .search-bar button {
+            padding: 15px 20px;
+            background-color: #1a73e8;
+            border: none;
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
         }
 
-        @keyframes buttonAnimation {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.1);
-            }
-            100% {
-                transform: scale(1);
-            }
+        .popular-searches h4 {
+            font-weight: 600;
+            margin-bottom: 10px;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
+        .search-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .search-tags span {
+            padding: 10px 15px;
+            background-color: #fff;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        .content-right {
+            position: relative;
+        }
+
+        .image-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            height: 400px;
+            background-color: #1a1a1a;
+            border-radius: 30px;
+            overflow: hidden;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .job-offers {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .job-offers p {
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .job-search-section {
+                flex-direction: column;
+                align-items: center;
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+
+            .content-left,
+            .content-right {
+                max-width: 100%;
             }
         }
+         .notification-icon, .profile-icon {
+            position: relative;
+        }
+        .notification-icon .badge, .profile-icon .badge {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background-color: red;
+            color: white;
+            font-size: 12px;
+        }
+        .rounded-button {
+            border: 1px solid #007bff;
+            border-radius: 50px;
+            padding: 5px 15px;
+        }
+         .dropdown-menu {
+            width: 300px;
+            padding: 20px;
+        }
+        .profile-icon img {
+            height: 40px;
+        }
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .profile-header img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+        .profile-info {
+            flex: 1;
+        }
+        .profile-info h6 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .profile-info p {
+            margin: 0;
+            font-size: 12px;
+            color: #777;
+        }
+        .profile-performance {
+            text-align: center;
+            margin: 10px 0;
+        }
+        .profile-performance h6 {
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .profile-performance .stat {
+            display: inline-block;
+            width: 50%;
+        }
+        .profile-performance .stat p {
+            margin: 5px 0;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .profile-options {
+            margin-top: 20px;
+        }
+        .profile-options .option {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+        }
+        .profile-options .option i {
+            font-size: 18px;
+            margin-right: 15px;
+            color: #007bff;
+        }
+        .profile-options .option p {
+            margin: 0;
+            font-size: 14px;
+        }
+        .profile-options hr {
+            margin: 10px 0;
+        }
+        .logout-option:hover {
+    background-color: #007bff;
+    color: #fff;
+    transform: scale(1.05);
+}
+.logout-option:hover i, .logout-option:hover a {
+    color: #fff;
+}
+.logout-option:hover .underline {
+    background-color: #fff;
+}
+        .navbar-brand img {
+            height: 25px;
+        }
+        .navbar-nav .nav-link {
+            margin-right: 20px;
+            font-size: 16px;
+        }
+    .section. body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+        .category-section {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.header {
+    margin-bottom: 30px;
+}
+
+.header h2 {
+    font-size: 2em;
+    color: #000;
+}
+
+.header p {
+    font-size: 1.2em;
+    color: #555;
+}
+
+.all-categories {
+    font-size: 1em;
+    color: #007bff;
+    text-decoration: none;
+    float: right;
+    margin-right: 20px;
+}
+
+.categories {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.category-card {
+    background-color: #f1f7ff;
+    padding: 20px;
+    border-radius: 12px;
+    width: 200px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.category-card .icon img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 15px;
+}
+
+.category-card h3 {
+    font-size: 1.2em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.category-card p {
+    color: #999;
+}
+
+.pagination {
+    margin-top: 20px;
+}
+
+.dot {
+    height: 10px;
+    width: 10px;
+    background-color: #ddd;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0 5px;
+}
+
+.dot.active {
+    background-color: #007bff;
+}
     </style>
 </head>
+
 <body>
-    <div class="overlay"></div>
-    <nav class="navbar">
-        <div class="logo">OJP</div>
-        <ul class="nav-links">
-            <li><a href="{% url 'employerhomepage' %}">Home</a></li>
-            <li><a href="{% url 'employermodule:view_job_details' %}">view jobs</a></li>
-            <li><a href="{% url 'employermodule:job_applications' %}">Dashboard</a></li>
-        </ul>
-        <div class="nav-links">
-            {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <span class="nav-link"style ="color:black">Welcome, {{user.username}}</span>
-                </li>
-                <div class="profile-dropdown">
-                    <img id="current-profile-picture" src="" alt="Profile Picture" class="profile-image">
-                    <div class="dropdown-content">
-                        <a href="{% url 'account_details' %}"><i class="fa fa-user"></i> Account</a>
-                        <a href="{% url 'user_profile' %}"><i class="fa fa-user-circle-o"></i> Profile</a>
-                        <a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> Logout</a>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="logo"> <a class="navbar-brand" href="{% url 'employerhomepage' %}">
+            <img src="{% static 'images/cc.png' %}" alt="Logo">
+        </a></div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Find Jobs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Companies</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Candidates</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Pages</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link notification-icon" href="#">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge badge-danger"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link profile-icon" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-bars"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <div class="profile-header">
+                                <img src="https://via.placeholder.com/50" alt="User Profile" class="rounded-circle">
+                                <div class="profile-info">
+                                    <h6>{{ user.username }}</h6>
+                                    <p>Not Mentioned</p>
+                                    <a href="#">View & Update Profile</a>
+                                </div>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <div class="profile-options">
+                                <a class="dropdown-item" href="#"><i class="fas fa-book"></i> careerconnect Blog</a>
+                                <a class="dropdown-item" href="#"><i class="fas fa-cog"></i> Settings</a>
+                                <a class="dropdown-item" href="#"><i class="fas fa-question-circle"></i> FAQs</a>
+                                <div class="dropdown-item logout-option d-flex justify-content-center align-items-center" style="border-radius: 10px; background-color: #f8f9fa; padding: 10px; border: 2px solid #007bff; transition: transform 0.3s ease, background-color 0.3s ease; position: relative;">
+                                    <i class="fas fa-sign-out-alt" style="color: #007bff; font-size: 20px; margin-right: 8px;"></i>
+                                    <a href="{% url 'logout' %}" style="color: #007bff; font-weight: bold; text-decoration: none;">Logout</a>
+                                    <div class="underline" style="position: absolute; bottom: -2px; left: 10px; right: 10px; height: 2px; background-color: #007bff;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="job-search-section">
+            <div class="content-left">
+                <h1>Find the perfect job for you</h1>
+                <p>Search your career opportunity through 12,800 jobs</p>
+                <div class="search-bar">
+                    <input type="text" placeholder="Job Title or Keyword">
+                    <input type="text" placeholder="All Locations">
+                    <br>
+                    <button class="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+
+                <div class="popular-searches">
+                    <h4>Popular Searches</h4>
+                    <div class="search-tags">
+                        <span>Engineer</span>
+                        <span>Remote</span>
+                        <span>Team Leader</span>
+                        <span>Fullstack</span>
+                        <span>Senior</span>
+                        <span>Software</span>
+                        <span>Web Developer</span>
+                        <span>Financial Analyst</span>
+                        <span>HR Manager</span>
                     </div>
                 </div>
-            {% endif %}
-        </div>
-    </nav>
-    <div class="content">
-        <div class="search-container">
-            <input type="text" placeholder="Enter Keywords..." class="search-bar" id="searchBar">
-            <button class="search-btn" onclick="searchFunction()">Search</button>
-        </div>
-        <br><br>
-        <a href="{% url 'employermodule:jobpost' %}" class="btn-discover"> Post a Job</a>
-    </div>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <div class="footer-basic">
-        <footer>
-            <div class="social">
-                <a href="#"><i class="fa fa-facebook"></i></a>
-                <a href="#"><i class="fa fa-google"></i></a>
-                <a href="#"><i class="fa fa-linkedin"></i></a>
-                <a href="#"><i class="fa fa-instagram"></i></a>
-                <a href="#"><i class="fa fa-twitter"></i></a>
             </div>
-            <ul class="list-inline">
-                <li class="list-inline-item"><a href="#">Home</a></li>
-                <li class="list-inline-item"><a href="">Services</a></li>
-                <li class="list-inline-item"><a href="#">About</a></li>
-                <li class="list-inline-item"><a href="#">Terms</a></li>
-                <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
-            </ul>
-            <br><br><br>
-            <center>
-                <p class="copyright">&copy; 2024 Job Portal. All rights reserved by DUDEKULA SALEEM.</p>
-            </center>
-        </footer>
-    </div>
-    <input type="hidden" id="profile-photo-url" value="{{ user_details.profile_image.url }}">
-    <script>
-         window.onload = function() {
-            var loggedInUser = "{{ user.username }}"; // Get the currently logged-in username from the template
-            if (loggedInUser) {
-                var storedProfile = localStorage.getItem(loggedInUser);
-                if (storedProfile) {
-                    var userProfile = JSON.parse(storedProfile);
-                    document.getElementById('current-profile-picture').src = userProfile.profilePicture;
-                }
-            }
-        };
-    </script>
+
+            <div class="content-right">
+                <div class="image-container">
+                    <img src="https://www.careerhigher.co/wp-content/uploads/2021/02/How-to-Evaluate-an-Employer-1.png" alt="Job Search Image">
+                    <div class="job-offers">
+                        <p>Job offers:</p>
+                        <h4>10k+ Open Positions</h4>
+                        <p>updated daily</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 </body>
+
 </html>

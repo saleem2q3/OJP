@@ -50,11 +50,54 @@ from django.shortcuts import render, redirect
 import re
 
 
+def employer_signup(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        email = request.POST['email'].lower()
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        pass1 = request.POST['password']
+        pass2 = request.POST['password1']
+
+        password_pattern = r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+
+        if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
+            messages.error(request, 'Invalid Email Format')
+            return render(request, 'employer_signup.html')
+
+        if not re.match(password_pattern, pass1):
+            messages.error(request,
+                           'Password must contain at least 8 characters, including one uppercase letter, '
+                           'one lowercase letter, one digit, and one special character.')
+            return render(request, 'employer_signup.html')
+
+        if pass1 != pass2:
+            messages.error(request, 'Passwords do not match')
+            return render(request, 'employer_signup.html')
+
+        if not re.match(r'^\d{4}$', username):
+            messages.error(request, 'Username must be 4 digits long for employers')
+            return render(request, 'employer_signup.html')
+
+        if User.objects.filter(username=username).exists():
+            messages.error(request, 'Username is already taken.')
+            return render(request, 'employer_signup.html')
+
+        if User.objects.filter(email=email).exists():
+            messages.error(request, 'Email is already registered.')
+            return render(request, 'employer_signup.html')
+
+        user = User.objects.create_user(username=username, email=email, password=pass1, first_name=first_name,
+                                        last_name=last_name)
+        user.save()
+
+        messages.success(request, 'Employer account created successfully. Please log in.')
+        return redirect('employer_login')
+
+    return render(request, 'employer_signup.html')
+
+
 def signup(request):
-    return render(request, 'signup.html')
-
-
-def signup1(request):
     if request.method == 'POST':
         username = request.POST['username']
         email = request.POST['email'].lower()
@@ -79,8 +122,8 @@ def signup1(request):
             messages.error(request, 'Passwords do not match')
             return render(request, 'signup.html')
 
-        if not re.match(r'^\d{4}$|^\d{10}$', username):
-            messages.error(request, 'Username must be 4 or 10 digits long')
+        if not re.match(r'^\d{10}$', username):
+            messages.error(request, 'Username must be 10 digits long for job seekers')
             return render(request, 'signup.html')
 
         if User.objects.filter(username=username).exists():
@@ -95,13 +138,13 @@ def signup1(request):
                                         last_name=last_name)
         user.save()
 
-        messages.success(request, 'Account created successfully. Please log in.')
+        messages.success(request, 'Job Seeker account created successfully. Please log in.')
         return redirect('login')
 
     return render(request, 'signup.html')
 
 
-def login1(request):
+def employer_login(request):
     if request.method == 'POST':
         username = request.POST['username']
         pass1 = request.POST['password']
@@ -111,33 +154,44 @@ def login1(request):
             stored_email = user.email.lower()
             provided_email = request.POST.get('email', '').lower()
 
-            if stored_email == provided_email:
+            if stored_email == provided_email and len(username) == 4:
                 auth.login(request, user)
-                if len(username) == 10:
-                    return redirect('jobseekerhomepage')
-                elif len(username) == 4:
-                    return redirect('employerhomepage')
-                else:
-                    return redirect('homepage')
+                return redirect('employerhomepage')
             else:
-                messages.error(request, 'Invalid Email')
+                messages.error(request, 'Invalid Email or Username')
+                return render(request, 'employer_login.html')
+        else:
+            messages.error(request, 'Invalid Username or Password')
+            return render(request, 'employer_login.html')
+
+    return render(request, 'employer_login.html')
+
+
+def login(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        pass1 = request.POST['password']
+        user = authenticate(request, username=username, password=pass1)
+
+        if user is not None:
+            stored_email = user.email.lower()
+            provided_email = request.POST.get('email', '').lower()
+
+            if stored_email == provided_email and len(username) == 10:
+                auth.login(request, user)
+                return redirect('jobseekerhomepage')
+            else:
+                messages.error(request, 'Invalid Email or Username')
                 return render(request, 'login.html')
         else:
-            # Check if the username exists
-            if User.objects.filter(username=username).exists():
-                messages.error(request, 'Invalid Password')
-            else:
-                messages.error(request, 'Invalid Username')
+            messages.error(request, 'Invalid Username or Password')
             return render(request, 'login.html')
 
-    else:
-        return render(request, 'login.html')
-
+    return render(request, 'login.html')
 
 def logout(request):
     auth.logout(request)
     return render(request, 'homepage.html')
-
 
 def read(request):
     return render(request, 'read.html')

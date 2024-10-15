@@ -1,281 +1,312 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Job Portal</title>
+     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="{% static 'images/logo.png' %}" type="image/x-icon">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <style>
-            /* Your existing CSS styles */
-            body {
-                margin: 0;
-                padding: 0;
-                font-family: Arial, sans-serif;
-            }
+    <title>CAREER CONNECT</title>
 
-            .navbar {
-                background-color: transparent;
-                padding: 15px 20px;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                color: #white;
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                z-index: 1000; /* Ensuring it's above other content */
-                transition: background-color 0.3s ease; /* Added transition */
-            }
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet"/>
+       <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet"/>
 
-            .navbar.navbar-scrolled {
-                background-color: #fff; /* Changed color when scrolled */
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Added shadow when scrolled */
-            }
-
-            .logo {
-                font-size: 24px;
-                font-weight: bold;
-                display: inline-block;
-                color: #000; /* Logo color */
-            }
-
-            .logo-image {
-                position: absolute;
-                top: 10px;
-                left: 10px;
-                height: 40px;
-                width: auto;
-            }
-
-            .nav-links {
-                list-style-type: none;
-                margin: 0;
-                padding: 0;
-                display: flex;
-                align-items: center;
-            }
-
-            .nav-links li {
-                margin-right: 20px;
-            }
-
-            .nav-links li a {
-                text-decoration: none;
-                color: #000;
-                transition: color 0.3s ease;
-            }
-
-            .nav-links li a:hover {
-                color: #999; /* Hover color */
-            }
-
-            .login-btn {
-                background-color: #ff0000;
-                color: #fff;
-                border: none;
-                padding: 8px 16px;
-                border-radius: 5px;
-                cursor: pointer;
-                transition: background-color 0.3s ease, color 0.3s ease;
-                text-decoration: none;
-            }
-
-            .login-btn:hover {
-                background-color: #fff;
-                color: #ff0000;
-            }
-
-            .content {
-                position: relative;
-            }
-
-            .big-image {
-                position: relative;
-                width: 100%;
-                height: 100vh; /* This will make the image cover the entire viewport */
-                overflow: hidden;
-            }
-
-            .big-image img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover; /* Ensures the image covers the entire area */
-            }
-
-            .overlay {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                text-align: center;
-                color: #fff;
-                z-index: 2;
-            }
-
-            .title {
-                font-size: 3em;
-                margin-bottom: 20px;
-            }
-
-            .description {
-                font-size: 1.5em;
-                margin-bottom: 30px;
-            }
-
-            .btn-discover {
-                background-color: #ff0000;
-                color: #fff;
-                padding: 10px 20px;
-                border-radius: 5px;
-                text-decoration: none;
-                transition: background-color 0.3s ease, color 0.3s ease;
-            }
-
-            .btn-discover:hover {
-                background-color: #fff;
-                color: #ff0000;
-            }
-
-            /* New Footer Styles */
-            .footer-basic {
-                padding: 40px 0;
-                background-color: #ffffff;
-                color: #4b4c4d;
-            }
-
-            .footer-basic ul {
-                padding: 0;
-                list-style: none;
-                text-align: center;
-                font-size: 18px;
-                line-height: 1.6;
-                margin-bottom: 0;
-            }
-
-            .footer-basic li {
-                padding: 0 10px;
-            }
-
-            .footer-basic ul a {
-                color: inherit;
-                text-decoration: none;
-                opacity: 0.8;
-            }
-
-            .footer-basic ul a:hover {
-                opacity: 1;
-            }
-
-            .footer-basic .social {
-                text-align: center;
-                padding-bottom: 25px;
-            }
-
-            .footer-basic .social>a {
-                font-size: 24px;
-                width: 40px;
-                height: 40px;
-                line-height: 40px;
-                display: inline-block;
-                text-align: center;
-                border-radius: 50%;
-                border: 1px solid #ccc;
-                margin: 0 8px;
-                color: inherit;
-                opacity: 0.75;
-            }
-
-            .footer-basic .social>a:hover {
-                opacity: 0.9;
-            }
-            @media only screen and (max-width: 768px) {
-    .logo {
-        font-size: 20px;
-    }
-
-    .navbar {
-        padding: 10px 15px;
-    }
-
-    .nav-links {
-        display: flex; /* Ensure nav-links are displayed */
-        flex-direction: row; /* Display links horizontally on mobile */
-        align-items: center; /* Center align links */
-        margin-top: 20px; /* Add some top margin */
-    }
-
-    .nav-links li {
-        margin-right: 20px; /* Add margin between links */
-    }
-
-    .nav-links li:last-child {
-        margin-right: 0; /* Remove margin from the last link */
-    }
-
-    .nav-links li a {
-        text-decoration: none;
-        color: #000;
-        transition: color 0.3s ease;
-    }
-
-    .nav-links li a:hover {
-        color: #999; /* Hover color */
-    }
-
-    .login-btn {
-        padding: 6px 12px;
-    }
-
-    .big-image {
-        height: 70vh;
-    }
-
-    .title {
-        font-size: 2.5em;
-    }
-
-    .description {
-        font-size: 1.2em;
-    }
-
-    .footer-basic .social>a {
-        font-size: 20px;
-        width: 35px;
-        height: 35px;
-        line-height: 35px;
-    }
+    <link href="lib/animate/animate.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+     <link rel="stylesheet" type="text/css" href="{% static 'css/homepage.css' %}" />
+    <style>
+        .logo {
+    position: relative; /* Ensures the logo is positioned relative to its parent */
+    max-width: 100%; /* Ensures the logo doesn't exceed the container's width */
+    overflow: hidden; /* Prevents any overflow */
 }
 
+.logo-img {
+    width: 190px; /* You can adjust this value to make the image larger */
+    height: auto; /* Maintains the aspect ratio of the image */
+    max-width: 100%; /* Ensures it doesn't exceed the container's width */
+}
+         .btn-employee {
+            padding: 10px 15px;
+            border-radius: 20px;
+            color: #007bff;
+        }
+         .btn-employee:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
 
-        </style>
+
+    </style>
 </head>
 
 <body>
     <div class="background"></div>
-    <nav class="navbar" id="navbar">
-    <div class="logo"><a href="{% url 'homepage' %}" style="color: black;">OJP</a></div>
-        <ul class="nav-links">
-            <li><a href="{% url 'homepage' %}">Home</a></li>
-            <li><a href="{% url 'about' %}">About</a></li>
-            <li><a href="{% url 'contact' %}">Contact</a></li>
-        </ul>
-        <a href="{% url 'login' %}" class="login-btn"><i class=""></i>Login</a>
-    </nav>
-  <br><br><br>
+ <nav class="navbar" id="navbar">
+    <div class="logo">
+        <a href="{% url 'homepage' %}" style="color: black;">
+           <img src="{% static 'images/cc.png' %}" alt="" class="logo-img" />
+
+        </a>
+    </div>
+    <ul class="nav-links">
+        <li><a href="#">Jobs</a></li>
+        <li><a href="#">Companies</a></li>
+        <li><a href="#">Services</a></li>
+    </ul>
+     <ul class="navbar-nav mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="btn btn-login" href="{% url 'login' %}">Login</a>
+                          <a class="btn btn-register" href="{% url 'signup' %}">Register</a>
+                          <div class="dropdown">
+    <a href="#" class="btn btn-login">For employers <i class="fas fa-caret-down"></i></a>
+    <div class="dropdown-content">
+        <a href="#" class="btn btn-employee"><i></i> Buy Online</a>
+        <a href="#" class="btn btn-employee"><i></i> Find Jobs</a>
+        <a href="{% url 'employer_login' %}" class="btn btn-employee"><i class="fas fa-sign-in-alt"></i> Employer Login</a>
+    </div>
+</div>
+                    </li>
+
+                    </ul>
+</nav>
+
     <div class="content">
         <div class="big-image">
-            <img src="https://www.iprs.org/wp-content/uploads/2019/11/faq_title.jpg" alt="Big Image">
+            <img src="https://www.iprs.org/wp-content/uploads/2019/11/faq_title.jpg" alt="Big Image" />
             <div class="overlay">
                 <h1 class="title">Find your jobs here</h1>
-                <p class="description">Various career opportunities await you.Find the right career and connect with companies Anytime,Anywhere</p>
-                <a href="{% url 'read' %}" class="btn-discover">Learn More...</a>
+                <p class="description">Various career opportunities await you. Find the right career and connect with companies Anytime, Anywhere.</p>
+                <a href="#" class="btn-discover">Learn More...</a>
             </div>
         </div>
     </div>
 
+     <!-- About Start -->
+    <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-7">
+                    <div class="section-title position-relative pb-3 mb-5">
+                        <h5 class="fw-bold text-primary text-uppercase">About Us</h5>
+                        <h1 class="mb-0">The Best IT Solution With 10 Years of Experience</h1>
+                    </div>
+                    <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum et tempor sit. Aliqu diam amet diam et eos labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus clita duo justo et tempor eirmod magna dolore erat amet</p>
+                    <div class="row g-0 mb-3">
+                        <div class="col-sm-6 wow zoomIn" data-wow-delay="0.2s">
+                            <h5 class="mb-3"><i class="fas fa-award text-primary me-3"></i>Award Winning</h5>
+                            <h5 class="mb-3"><i class="fa fa-check text-primary me-3"></i>Professional Staff</h5>
+                        </div>
+                        <div class="col-sm-6 wow zoomIn" data-wow-delay="0.4s">
+                            <h5 class="mb-3"><i class="fa fa-check text-primary me-3"></i>24/7 Support</h5>
+                            <h5 class="mb-3"><i class="fa fa-check text-primary me-3"></i>Fair Prices</h5>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center mb-4 wow fadeIn" data-wow-delay="0.6s">
+                        <div class="bg-primary d-flex align-items-center justify-content-center rounded" style="width: 60px; height: 60px;">
+                            <i class="fa fa-phone text-white"></i>
+                        </div>
+                        <br/>
+                        <div class="ps-4">
+                            <h5 class="mb-2">Call to ask any question</h5>
+                            <h4 class="text-primary mb-0">+012 345 6789</h4>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-primary py-3 px-5 mt-3 wow zoomIn" data-wow-delay="0.9s">Request A Quote</a>
+                </div>
+                <div class="col-lg-5" style="min-height: 500px;">
+                    <div class="position-relative h-100">
+                        <img class="position-absolute w-100 h-100 rounded wow zoomIn" data-wow-delay="0.9s" src="https://imgs.search.brave.com/_2CFZ6u9xIHg7Us1JRgrN6TXCfin2XnJlqx2t8rvoUo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/ZnJlZS1waG90by9q/b2ItaGlyaW5nLXZh/Y2FuY3ktdGVhbS1p/bnRlcnZpZXctY2Fy/ZWVyLXJlY3J1aXRp/bmdfNTM4NzYtMTIy/ODAyLmpwZz9zaXpl/PTYyNiZleHQ9anBn" style="object-fit: cover;"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+    <!-- Features Start -->
+    <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="section-title text-center position-relative pb-3 mb-5 mx-auto" style="max-width: 600px;">
+                <h5 class="fw-bold text-primary text-uppercase">Why Choose Us</h5>
+                <h1 class="mb-0">We Are Here to Grow Your Business Exponentially</h1>
+            </div>
+            <div class="row g-5">
+                <div class="col-lg-4">
+                    <div class="row g-5">
+                        <div class="col-12 wow zoomIn" data-wow-delay="0.2s">
+                            <div class="bg-primary rounded d-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                <i class="fa fa-cubes text-white"></i>
+                            </div>
+                            <h4>Best In Industry</h4>
+                            <p class="mb-0">Magna sea eos sit dolor, ipsum amet lorem diam dolor eos et diam dolor</p>
+                        </div>
+                        <div class="col-12 wow zoomIn" data-wow-delay="0.6s">
+                            <div class="bg-primary rounded d-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                <i class="fas fa-award text-white"></i>
+                            </div>
+                            <h4>Award Winning</h4>
+                            <p class="mb-0">Magna sea eos sit dolor, ipsum amet lorem diam dolor eos et diam dolor</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4  wow zoomIn" data-wow-delay="0.9s" style="min-height: 350px;">
+                    <div class="position-relative h-100">
+                        <img class="position-absolute w-100 h-100 rounded wow zoomIn" data-wow-delay="0.1s" src="https://imgs.search.brave.com/CnPXjeoJ313Z6RBErAeyITngyMCaUKZTczMqKC8t2dc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/cHJlbWl1bS1waG90/by9oaXJpbmctY2Fy/ZWVyLWVtcGxveW1l/bnQtaHVtYW4tcmVz/b3VyY2VzLWNvbmNl/cHRfNTM4NzYtMTIy/NTQyLmpwZz9zaXpl/PTYyNiZleHQ9anBn" style="object-fit: cover;"/>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="row g-5">
+                        <div class="col-12 wow zoomIn" data-wow-delay="0.4s">
+                            <div class="bg-primary rounded d-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                <i class="fa fa-users text-white"></i>
+                            </div>
+                            <h4>Professional Staff</h4>
+                            <p class="mb-0">Magna sea eos sit dolor, ipsum amet lorem diam dolor eos et diam dolor</p>
+                        </div>
+                        <div class="col-12 wow zoomIn" data-wow-delay="0.8s">
+                            <div class="bg-primary rounded d-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                <i class="fa fa-phone text-white"></i>
+                            </div>
+                            <h4>24/7 Support</h4>
+                            <p class="mb-0">Magna sea eos sit dolor, ipsum amet lorem diam dolor eos et diam dolor</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="job-container">
+        <div class="job-content">
+            <h1 class="job-title">Popular <span>Job</span> Portal</h1>
+            <p class="job-description">
+                Welcome to the Popular Job Portal, your go-to platform for discovering a wide range of job opportunities across various industries. Our portal is designed to connect job seekers with top employers, providing a seamless and efficient job search experience.
+            </p>
+            <p class="job-description">
+                We offer advanced job search features, including personalized job recommendations, real-time notifications, and career advice to help you succeed in your job search journey. Whether you are looking for your first job, a career change, or seeking new challenges, the Popular Job Portal has something for everyone.
+            </p>
+            <button class="apply-now">Apply Now</button>
+        </div>
+        <div class="image-gallery">
+            <img src="https://codezion.com/themes/tm/html/oneline/assets/images/about-2.jpeg" alt="Team Collaboration" />
+            <img src="https://codezion.com/themes/tm/html/oneline/assets/images/about-3.jpeg" alt="Job Interviews" />
+            <img src="https://codezion.com/themes/tm/html/oneline/assets/images/about-4.jpeg" alt="Work Environment" />
+            <img src="https://codezion.com/themes/tm/html/oneline/assets/images/about-5.jpeg" alt="Team Discussion" />
+        </div>
+    </div>
+     <!-- How Apply Process Start-->
+    <div class="apply-process-area apply-bg pt-150 pb-150" data-background="assets/img/gallery/how-applybg.png">
+        <div class="container">
+            <!-- Section Tittle -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-tittle white-text text-center">
+                        <span>Apply process</span>
+                        <h1>How it works</h1>
+                    </div>
+                </div>
+            </div>
+            <!-- Apply Process Caption -->
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-process text-center mb-30">
+                        <div class="process-ion">
+                            <span class="fas fa-search"></span>
+                        </div>
+                        <div class="process-cap">
+                            <h3>1. Search a job</h3>
+            <p>Explore a wide range of job opportunities in various industries and locations. Use filters to narrow down your search.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-process text-center mb-30">
+                        <div class="process-ion">
+                            <span class="fas fa-file-alt"></span>
+                        </div>
+                        <div class="process-cap">
+                            <h3>2. Apply for job</h3>
+            <p>Submit your application easily with just a few clicks. Ensure your profile is up-to-date for the best impression.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-process text-center mb-30">
+                        <div class="process-ion">
+                            <span class="fas fa-briefcase"></span>
+                        </div>
+                        <div class="process-cap">
+                           <h3>3. Get your job</h3>
+            <p>Receive interview invitations and job offers. Connect with employers and start your new career journey.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Blog Area Start -->
+        <div class="home-blog-area blog-h-padding">
+            <div class="container">
+                <!-- Section Tittle -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-tittle text-center">
+                            <span>Our latest blog</span>
+                            <h2>Our recent news</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-6">
+                        <div class="home-blog-single mb-30">
+                            <div class="blog-img-cap">
+                                <div class="blog-img">
+                                    <img src="https://www.simplilearn.com/ice9/free_resources_article_thumb/Top_11_Highest_Salary_Jobs_in_India_to_Watch_Out_For_in_2022.jpg" alt=""/>
+                                    <!-- Blog date -->
+                                    <div class="blog-date text-center">
+                                        <span>24/7</span>
+                                        <p>Now</p>
+                                    </div>
+                                </div>
+                                <div class="blog-cap">
+                                    <p>|   Properties</p>
+                                    <h3><a href="#">Footprints in Time is perfect House in Kurashiki</a></h3>
+                                    <a href="#" class="more-btn">Read more »</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6">
+                        <div class="home-blog-single mb-30">
+                            <div class="blog-img-cap">
+                                <div class="blog-img">
+                                    <img src="https://www.terawork.com/blog/wp-content/uploads/2021/03/Four-advatages-of-working-with-freelance-professionals.png" alt=""/>
+                                    <!-- Blog date -->
+                                    <div class="blog-date text-center">
+                                        <span>24/7</span>
+                                        <p>Now</p>
+                                    </div>
+                                </div>
+                                <div class="blog-cap">
+                                    <p>|   Properties</p>
+                                    <h3><a href="#">Footprints in Time is perfect House in Kurashiki</a></h3>
+                                    <a href="#" class="more-btn">Read more »</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+     <div class="hero-section">
+            <div class="content">
+                <h1>Find Freelance Services For Your Business Today</h1>
+                <p>We've got you covered for all your business needs</p>
+                <a href="#" class="btn">Get Started</a>
+            </div>
+        </div>
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
 
     <!-- Footer Section -->
     <div class="footer-basic">
@@ -299,8 +330,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
     <script>
-        // JavaScript to add animation to navbar when scrolling
-        $(window).scroll(function () {
+       $(window).scroll(function () {
             if ($(this).scrollTop() > 50) {
                 $('#navbar').addClass('navbar-scrolled');
             } else {

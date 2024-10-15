@@ -8,11 +8,10 @@
     <style>
         body {
             background-color: #f2f2f2;
-            margin: 0; /* Reset default margin */
-            padding: 0; /* Reset default padding */
+            margin: 0;
+            padding: 0;
         }
 
-        /* Navbar Styles */
         .navbar {
             background-color: #ffffff;
             padding: 15px 10px;
@@ -53,13 +52,11 @@
             color: #000;
         }
 
-        /* Content Styles */
         .content {
             padding: 20px;
             padding-top: 70px;
         }
 
-        /* Table Styles */
         table {
             font-family: Arial, Helvetica, sans-serif;
             border-collapse: collapse;
@@ -68,14 +65,14 @@
 
         th, td {
             border: 1px solid #ddd;
-            padding: 8px; /* Adjusted padding */
+            padding: 8px;
             text-align: left;
-            font-size: 14px; /* Adjusted font size */
+            font-size: 14px;
         }
 
         th {
-            padding-top: 12px; /* Adjusted padding */
-            padding-bottom: 12px; /* Adjusted padding */
+            padding-top: 12px;
+            padding-bottom: 12px;
             background-color: #04AA6D;
             color: white;
         }
@@ -88,7 +85,6 @@
             background-color: #ddd;
         }
 
-        /* Button Styles */
         .btn {
             display: inline-block;
             padding: 8px 16px;
@@ -132,7 +128,6 @@
             }
         }
 
-        /* Footer Styles */
         .footer-basic {
             padding: 40px 0;
             background-color: #ffffff;
@@ -190,8 +185,6 @@
         .footer-basic .social>a:hover {
             opacity: 0.9;
         }
-
-
     </style>
 </head>
 <body>
@@ -208,6 +201,7 @@
         <table>
             <thead>
                 <tr>
+                    <th>#</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Job Details</th>
@@ -224,6 +218,7 @@
             <tbody>
                 {% for job_application in job_applications %}
                     <tr>
+                        <td>{{ forloop.counter }}</td>
                         <td>{{ job_application.name }}</td>
                         <td>{{ job_application.email }}</td>
                         <td>{{ job_application.job_details }}</td>
@@ -241,7 +236,6 @@
                                 No profile image
                             {% endif %}
                         </td>
-                        <!-- New columns for additional fields -->
                         <td>{{ job_application.cover_letter }}</td>
                         <td>{{ job_application.personal_information }}</td>
                         <td>{{ job_application.work_history }}</td>
@@ -259,7 +253,6 @@
                                 No additional documents uploaded
                             {% endif %}
                         </td>
-                        <!-- Action buttons -->
                         <td>
                             <a href="{% url 'employermodule:approve_application' job_application.id %}" class="btn btn-success">Approve</a>
                             <a href="{% url 'employermodule:reject_application' job_application.id %}" class="btn btn-danger">Reject</a>
