@@ -25,20 +25,6 @@ CareerConnect is a Django-based online job portal that facilitates interaction b
 - Django 3.x or later
 - Virtual Environment
 
-
-Project Structure
-
-OJP/
-│
-├── adminmodule/          # Admin functionality
-├── employermodule/       # Employer-related features
-├── jobseekermodule/      # Job seeker-related features
-├── static/               # Static files (CSS, JS, images)
-├── templates/            # HTML templates
-├── CareerConnect/        # Main project configuration
-└── README.md             # Project documentation
-
-
 Homepage
 
 ![image](https://github.com/user-attachments/assets/e5b78ec6-0843-4413-9d6c-4c6257332fc0)
